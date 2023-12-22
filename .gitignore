@@ -1,5 +1,5 @@
 #ignoring the node_modules
-node_modules
+node_modules/
 
 #ignoring the .vs directory
 .vs/
