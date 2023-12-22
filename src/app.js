@@ -1,11 +1,11 @@
 const express = require("express");
-require('./config/connection');
+require("dotenv").config();
+require("./config/connection");
+const routes = require("./routes/index");
 
 const app = express();
-const rotaCartoes = require("./routes/cartoes")
 
-app.use(rotaCartoes);
+routes(app);
 
-app.use(express.json())
 
 module.exports = app;
