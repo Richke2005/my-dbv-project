@@ -1,5 +1,5 @@
 const express = require("express");
-const rotaCartoes = require("./cartoes");
+const dbvRoute = require("./desbravadores");
 
 function routes(app){
 	app.route("/").get((req, res) =>{
@@ -8,7 +8,7 @@ function routes(app){
 
 	app.use(
 		express.json(),
-		rotaCartoes
+		dbvRoute
 	);
 }
 

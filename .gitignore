@@ -3,6 +3,7 @@ node_modules/
 
 #ignoring the .vs directory
 .vs/
+.vscode/
 
 #credentials of my application
 *.env
