@@ -12,7 +12,7 @@ function connect(){
 	});
 
 	conn.once("open", () => {
-		console.log("connection sucessfull to mongoDB");
+		console.log("connection successful to mongoDB");
 	});
 }
 
