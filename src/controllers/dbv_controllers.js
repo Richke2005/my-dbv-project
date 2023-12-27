@@ -1,7 +1,7 @@
 const { desbravadores } = require("../models/index");
 
 class DbvController{
-	static getDbv(req, res){
+	static async getDbv(req, res){
 		try{
 			const dbvData = desbravadores.find();
 			res.status(200).send(dbvData);
