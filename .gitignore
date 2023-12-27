@@ -5,6 +5,9 @@ node_modules/
 .vs/
 .vscode/
 
+#ignoring the coverage files
+coverage/
+
 #credentials of my application
 *.env
 

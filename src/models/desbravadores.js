@@ -39,20 +39,9 @@ const dbvSchema = mongoose.Schema({
 	timestamp: true
 });
 
-const desbravadores = mongoose.model("desbravadores", dbvSchema);
+const desbravador = mongoose.model("desbravadores", dbvSchema);
 
-module.exports = desbravadores;
+module.exports = desbravador;
 
-const request = new desbravadores({
-	name: "Luan de Paes Mendes",
-	email: "luanzin@gameplays.com.br",
-	phoneNumber: "1198736472",
-	frequency: 10,
-	talents: 10,
-	age: 18,
-	parents: "658b3b40d8ac4c44b7b56758"
-});
 
-request.save().then((response) => {
-	console.log(response);
-});
+

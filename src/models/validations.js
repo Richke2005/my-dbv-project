@@ -1,5 +1,14 @@
+const mongoose = require("mongoose");
+
+const globalValidator = ()=> mongoose.Schema.Types.String.set("validate", {
+	validator: (valor)=> valor.trim() !== ""
+	,
+	message: ({path})=> `O campo ${path} foi fornecido(a) em branco`
+});
+
 function validatePhoneNumber(value){
-	if(value.length !== 11){
+	const phoneNumber = value.replace(/[^0-9]/g, "");
+	if(phoneNumber.length !== 11){
 		return false;
 	}else{
 		return true;
@@ -7,5 +16,6 @@ function validatePhoneNumber(value){
 }
 
 module.exports = {
-	validatePhoneNumber
+	globalValidator,
+	validatePhoneNumber,
 };
