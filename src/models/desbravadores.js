@@ -17,7 +17,7 @@ const dbvSchema = mongoose.Schema({
 		required: [true, "The phone number is required"],
 		validate: {
 			validator: validatePhoneNumber,
-			message: "The phone number must have 11 numbers this have {VALUE}"
+			message: "This {VALUE} phone number must have 11 characters"
 		}
 	},
 	frequency: {
@@ -27,7 +27,9 @@ const dbvSchema = mongoose.Schema({
 		type: Number
 	},
 	age: {
-		type: Number
+		type: Number,
+		min: [10, "Only ages between 10 and 15 are allowed\nYour age {VALUE}",],
+		max: [15, "Only ages between 10 and 15 are allowed\nYour age {VALUE}"]
 	},
 	parents: {
 		type: mongoose.Schema.Types.ObjectId,

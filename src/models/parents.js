@@ -9,19 +9,19 @@ const parentsSchema = mongoose.Schema({
 	},
 	contacts: {
 		type: Object,
-		contact1: {type: String},
-		contact2: {type: String},
-		required: [ function(value){
-			if(!value.contact1 && !value.contact){
-				return false;
-			}else{
-				return true;
-			}
-		}, "At least one contact must provided"],
-		validate: {
-			validator: validatePhoneNumber,
-			message: "The phone number must have 11 numbers this have {VALUE}"
-		}
+		contact1: {
+			type: String, 
+			validate: {
+				validator: validatePhoneNumber,
+				message: "The phone number {VALUE} must have 11 characters"
+			}},
+		contact2: {
+			type: String, 
+			validate: {
+				validator: validatePhoneNumber,
+				message: "The phone number {VALUE} must have 11 characters"
+			}},
+		required: [true, "At least one number must be provided"],
 	},
 	
 	email: {type: String},
