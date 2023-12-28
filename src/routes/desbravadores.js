@@ -6,6 +6,7 @@ const router = Router();
 
 router
 	.get("/desbravadores", DbvController.getDbv)
+	.get("/desbravadores/:id", DbvController.getDbvById)
 	.post("/desbravadores", function (req, res){
 		res.status(200).send({message: "this is the post route dbv successful"});
 	})

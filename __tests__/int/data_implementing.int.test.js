@@ -1,8 +1,8 @@
-const {desbravador} = require("../../src/models/index");
+const {desbravadores} = require("../../src/models/index");
 
 describe("Implementing tests in database", ()=>{
 	it("Should create a new desbravador", async ()=>{
-		const dbv = new desbravador({
+		const dbv = new desbravadores({
 			name: "Luan de Paes Mendes",
 			email: "luanzin@gameplays.com.br",
 			phoneNumber: "11987367853",

@@ -41,9 +41,9 @@ const dbvSchema = mongoose.Schema({
 	timestamp: true
 });
 
-const desbravador = mongoose.model("desbravadores", dbvSchema);
+const desbravadores = mongoose.model("desbravadores", dbvSchema);
 
-module.exports = desbravador;
+module.exports = desbravadores;
 
 
 
