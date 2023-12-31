@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { verifyIsArrayAndNotEmpty } = require("./validations");
 
 const classSchema = mongoose.Schema({
 	id: {type: String},
@@ -17,14 +18,20 @@ const classSchema = mongoose.Schema({
 		min: [0, "The class frequency must be between 0 and 100"],
 		max: [100, "The class frequency must be between 0 and 100"]
 	},
-	desbravadores: [{
-		type: mongoose.Schema.Types.ObjectId, ref: "desbravadores",
-		required: [true, "It's necessary to supply a dbv_ID"]
-	}],
-	cards: [{
-		type: mongoose.Schema.Types.ObjectId, ref: "cards",
-		required: [true, "It's necessary to supply a dbv_ID"]
-	}],
+	desbravadores: {
+		type: [mongoose.Schema.Types.ObjectId], ref: "desbravadores",
+		validate: {
+			validator: verifyIsArrayAndNotEmpty,
+			message: "0 pathfinders were provided"
+		}
+	},
+	cards: {
+		type: [mongoose.Schema.Types.ObjectId], ref: "cards",
+		validate: { 
+			validator: verifyIsArrayAndNotEmpty,
+			message: "0 cards were provided"
+		}
+	},
 	schedule_meetings: {
 		type: Number,
 		required: [true, "This parameter is required"]
@@ -38,3 +45,4 @@ const classSchema = mongoose.Schema({
 const classes = mongoose.model("classes", classSchema);
 
 module.exports = classes;
+

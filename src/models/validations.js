@@ -15,7 +15,12 @@ function validatePhoneNumber(value){
 	}
 }
 
+function verifyIsArrayAndNotEmpty(v){
+	return Array.isArray(v) && v.length > 0;
+}
+
 module.exports = {
 	globalValidator,
 	validatePhoneNumber,
+	verifyIsArrayAndNotEmpty
 };
