@@ -1,17 +1,34 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { useState } from "react";
+import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 
-const Login = ()=>{
+const Login = ({navigation})=>{
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     return<View style={styles.container}>
         <View style={styles.loginBox}>
-            <TextInput 
-            onChangeText={(target)=> console.log(target)}
+            <TextInput
+            //Animate with push up
+            onFocus={()=> console.log("Enter email")}
+            onChangeText={(target)=> setEmail(target)}
             style={styles.input}
             placeholder="Your email here"/>
             <TextInput
-            onChangeText={(target)=> console.log(target)}
+            //Animate with push up
+            onFocus={()=> console.log("Enter password")}
+            onChangeText={target=> setPassword(target)}
             style={styles.input}
             placeholder="password"
             />
+            <Button
+            title="Login"
+            onPress={()=> {
+                if(email == "richardke18@gmail.com" && password == "Kend2005@"){
+                    navigation.navigate("home");
+                }else{
+                    console.log("Wrong email or password");
+                }
+            }}/>
         </View>
     </View>
 }
@@ -26,6 +43,7 @@ const styles = StyleSheet.create({
 
     loginBox:{
         width: 300,
+        height: 400,
         borderRadius: 10,
         padding: 10,
         backgroundColor: '#fff',
@@ -37,7 +55,7 @@ const styles = StyleSheet.create({
 
     input: {
         height: 40,
-        width: "60%",
+        width: "70%",
         borderBottomWidth: 1,
         margin: 12,
         padding: 10

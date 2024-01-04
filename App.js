@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, SafeAreaView } from 'react-native';
+import { StatusBar, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/screens/home/home';
@@ -11,16 +11,16 @@ export default function App() {
   return (
   <NavigationContainer>
     <StatusBar barStyle="dark-content" />
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="login">
       <Stack.Screen 
-      name="Home"
+      name="home"
       component={Home}
-      options={{title: "Home-Page"}}
+      options={{title: "Home"}}
       />
       <Stack.Screen 
-      name="Login"
+      name="login"
       component={Login} 
-      options={{title: "login"}}/>
+      options={{title: "Login"}}/>
     </Stack.Navigator>
   </NavigationContainer>
   );
