@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import { View, TextInput, StyleSheet, Pressable, Text } from "react-native";
 
 const Login = ({navigation})=>{
     const [email, setEmail] = useState("");
@@ -20,15 +20,16 @@ const Login = ({navigation})=>{
             style={styles.input}
             placeholder="password"
             />
-            <Button
-            title="Login"
-            onPress={()=> {
+            <Pressable 
+            onPressIn={()=> {
                 if(email == "richardke18@gmail.com" && password == "Kend2005@"){
                     navigation.navigate("home");
                 }else{
                     console.log("Wrong email or password");
                 }
-            }}/>
+            }}>
+                <Text>Login</Text>
+            </Pressable>
         </View>
     </View>
 }
