@@ -1,21 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 
-class BibleServices{
-    #connAPI
-    constructor(){
-        this.#connAPI = axios.create({baseURL: "https://www.abibliadigital.com.br/api"})
-    }
+const connAPI = axios.create({ baseURL: "https://www.abibliadigital.com.br/api" });
 
-    async getRandomVerse(version){
-        const response = await this.#connAPI.get(`/verses/${version}/random`);
-        return response.data;
-    }
-
-    async getBooks(){
-        const response = await this.#connAPI.get("/books");
-        return response.data;
-    }
-
+async function getRandomVerse(version) {
+	const response = await connAPI.get(`/verses/${version}/random`);
+	return response.data;
 }
 
-export default BibleServices;
+async function getBooks() {
+	const response = await connAPI.get("/books");
+	return response.data;
+}
+
+export {
+	getRandomVerse,
+	getBooks
+};
