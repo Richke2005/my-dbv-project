@@ -10,12 +10,13 @@ const VerseOfDay = ({image})=>{
         fetchVerse();
     }, [])
 
-    async function fetchVerse(){
-        const booksFromAPI = await new BibleServices().getRandomVerse("acf");
-        setData(booksFromAPI);
+    function fetchVerse(){
+        new BibleServices()
+        .getRandomVerse("acf")
+        .then(data => setData(data));
     }
 
-    if(book == undefined && text == undefined){
+    if( book == undefined && text == undefined){
         return <Text>Loading...</Text>
     }
 

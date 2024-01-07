@@ -48,8 +48,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         backgroundColor: '#fff',
-        shadowColor: '#000',
-        shadowOpacity: 0.4,
+        boxShadow: `1px ${StyleSheet.hairlineWidth}px ${StyleSheet.hairlineWidth}px #0000001A`,
         alignItems: 'center',
         justifyContent: 'center'
     },
