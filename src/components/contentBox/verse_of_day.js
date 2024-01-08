@@ -45,14 +45,14 @@ function VerseOfDay() {
 		>
 			<Image
 				style={style.backgroundImage}
-				source={searchedImages[0]}
+				source={{uri: searchedImages[0]}}
 			/>
 			<View
 				style={style.contentView}
 			>
 				<View>
 					<Text style={{ color: "white" }}>versículo do dia:</Text>
-					<Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>{`${book.name} ${chapter}:${number}`}</Text>
+					<Text style={{ fontSize: 25, fontWeight: "bold", color: "white" }}>{`${book.name} ${chapter}:${number}`}</Text>
 				</View>
 				<View>
 					<Text style={{ color: "white" }}>{text}</Text>

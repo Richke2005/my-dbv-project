@@ -1,12 +1,14 @@
 import React from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import VerseOfDay from "../../components/contentBox/verse_of_day";
+import WidgetWindow from "./components/widgets_window";
 
 function Home() {
 	return (
 		<ScrollView>
 			<View style={styles.container}>
-				<VerseOfDay />
+				<VerseOfDay/>
+				<WidgetWindow/>
 			</View>
 		</ScrollView>
 	);
