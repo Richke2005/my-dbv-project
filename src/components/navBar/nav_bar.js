@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, Pressable, StyleSheet, } from "react-native";
+import * as RootNavigation from "../../navigation/root_navigation";
 import { AntDesign as Icon } from "@expo/vector-icons";
 
 const NavBar = ()=>{
 	return<View style={style.navBarView}>
 		<Pressable 
-			onPress={()=>console.log("book")}> 
+			onPress={()=> RootNavigation.navigate("login")}> 
 			<Icon
 				name="book"
 				size={30}
@@ -15,7 +16,7 @@ const NavBar = ()=>{
 		</Pressable>
 
 		<Pressable
-			onPress={()=>console.log("home")}>
+			onPress={()=> RootNavigation.navigate("home")}>
 			<Icon
 				name="home"
 				size={30}
