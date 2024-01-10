@@ -4,13 +4,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/screens/home/home";
 import Login from "./src/screens/login/login";
+import NavBar from "./src/components/navBar/nav_bar";
 
 const Stack = createNativeStackNavigator();
 
 
 export default function App() {
 	return (
-		<NavigationContainer>
+		<NavigationContainer >
 			<StatusBar barStyle="dark-content" />
 			<Stack.Navigator initialRouteName="home">
 				<Stack.Screen 
@@ -23,8 +24,8 @@ export default function App() {
 					component={Login} 
 					options={{title: "Login"}}/>
 			</Stack.Navigator>
+			<NavBar/>
 		</NavigationContainer>
 	);
 }
-
 

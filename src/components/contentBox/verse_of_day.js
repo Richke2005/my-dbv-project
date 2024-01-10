@@ -4,6 +4,7 @@ import {
 	StyleSheet, Image, Text, View,
 } from "react-native";
 import { getRandomVerse, curatedPhoto } from "../../services/index";
+import textStyle from "../texts/text_styles";
 
 function VerseOfDay() {
 	const [verseData, setVerse] = useState([]);
@@ -51,11 +52,11 @@ function VerseOfDay() {
 				style={style.contentView}
 			>
 				<View>
-					<Text style={{ color: "white" }}>versículo do dia:</Text>
-					<Text style={{ fontSize: 25, fontWeight: "bold", color: "white" }}>{`${book.name} ${chapter}:${number}`}</Text>
+					<Text style={textStyle.normalText}>versículo do dia:</Text>
+					<Text style={textStyle.VerseOfDay}>{`${book.name} ${chapter}:${number}`}</Text>
 				</View>
 				<View>
-					<Text style={{ color: "white" }}>{text}</Text>
+					<Text style={textStyle.normalText}>{text}</Text>
 				</View>
 			</View>
 		</View>
@@ -75,7 +76,7 @@ const style = StyleSheet.create({
 		width: "100%",
 		height: "100%",
 		position: "absolute",
-		objectFit: "fill",
+		objectFit: "cover",
 		borderRadius: 10,
 	},
 
