@@ -3,7 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 import textStyle from "../texts/text_styles";
 
 const Announcement = ()=>{
-	return<View style={style.announcementView}>
+	return<View style={style.announcementView}
+		onPointerDown={()=>console.log("Anounccement")}>
 		<Text style={textStyle.title}>Announcement</Text>
 	</View>;
 };

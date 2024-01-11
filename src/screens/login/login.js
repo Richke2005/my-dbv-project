@@ -1,20 +1,23 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { useState } from "react";
-import { View, TextInput, StyleSheet, Pressable, Text } from "react-native";
+import { View, TextInput, Text, StyleSheet } from "react-native";
+import { AntDesign as Icon } from "@expo/vector-icons";
 
 const Login = ({navigation})=>{
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [placeholder, setPlaceholder] = useState("your email here");
 
 	return<View style={styles.container}>
 		<View style={styles.loginBox}>
+			<Text style={{fontSize: 30, color: "black", letterSpacing: 3, textAlign: "center"}}>Primícias do amanhã</Text>
 			<TextInput
 				//Animate with push up
 				onFocus={()=> console.log("Enter email")}
 				onChangeText={(target)=> setEmail(target)}
 				style={styles.input}
-				placeholder="Your email here"/>
+				placeholder={placeholder}/>
 			<TextInput
 				//Animate with push up
 				onFocus={()=> console.log("Enter password")}
@@ -22,16 +25,18 @@ const Login = ({navigation})=>{
 				style={styles.input}
 				placeholder="password"
 			/>
-			<Pressable 
-				onPressIn={()=> {
+			<Icon.Button
+				name="login" 
+				size={30}
+				backgroundColor="black"
+				style={{width: 200}}
+				onPressIn={()=>{
 					if(email == "richardke18@gmail.com" && password == "Kend2005@"){
 						navigation.navigate("home");
 					}else{
-						console.log("Wrong email or password");
+						setPlaceholder("wrong email");
 					}
-				}}>
-				<Text>Login</Text>
-			</Pressable>
+				}}>Login</Icon.Button>
 		</View>
 	</View>;
 };
@@ -52,7 +57,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		boxShadow: `3px ${StyleSheet.hairlineWidth}px ${StyleSheet.hairlineWidth}px #0000001A`,
 		alignItems: "center",
-		justifyContent: "center"
+		justifyContent: "space-around"
 	},
 
 	input: {
