@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { validatePhoneNumber } = require("./validations");
+const { validatePhoneNumber } = require("../validations/models");
 
 const parentsSchema = mongoose.Schema({
 	id: {type: String},

@@ -1,12 +1,12 @@
 const { desbravadores } = require("../models/index");
 
 class DbvController{
-	static async getDbv(req, res){
+	static async getDbv(req, res, next){
 		try{
 			const dbvData = await desbravadores.find();
 			res.status(200).send(dbvData);
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error);
 		}
 	}
 

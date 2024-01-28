@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { verifyIsArrayAndNotEmpty } = require("./validations");
+const { verifyIsArrayAndNotEmpty } = require("../validations/models/");
 
 const classSchema = mongoose.Schema({
 	id: {type: String},
