@@ -1,4 +1,4 @@
-const { globalValidator } = require("./validations");
+const { globalValidator } = require("../validations/models/");
 globalValidator();
 
 const desbravadores = require("./desbravadores");

@@ -1,7 +1,7 @@
 const { parents } = require("../models/index");
 
 class ParentsController{
-	static async getParents(req, res) {
+	static async getParents(req, res, next) {
 		try {
 			const parentsData = await parents.find();
 			res.status(200).send(parentsData);
@@ -10,7 +10,7 @@ class ParentsController{
 		}
 	}
 
-	static async getParentsById(req, res){
+	static async getParentsById(req, res, next){
 		try{
 			const id = req.params.id;
 			const parentsData = await parents.findById(id);
@@ -26,7 +26,7 @@ class ParentsController{
 		}
 	}
 
-	static async postParents(req, res){
+	static async postParents(req, res, next){
 		try{
 			const parentsData = new parents(req.body);
 			await parentsData.save();
@@ -37,7 +37,7 @@ class ParentsController{
 		}
 	}
 
-	static async putParents(req, res){
+	static async putParents(req, res, next){
 		try{
 			const id = req.params.id;
 			const updatedParent = await parents.findByIdAndUpdate(id, {$set: req.body});
@@ -52,7 +52,7 @@ class ParentsController{
         
 	}
 
-	static async deleteParents(req, res){
+	static async deleteParents(req, res, next){
 		try{
 			const id = req.params.id;
 

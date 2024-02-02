@@ -10,7 +10,7 @@ class DbvController{
 		}
 	}
 
-	static async getDbvById(req, res){
+	static async getDbvById(req, res, next){
 		try{
 			const id = req.params.id;
 			const searchedDbv = await desbravadores
@@ -28,7 +28,7 @@ class DbvController{
 		}
 	}
 
-	static async postDbv(req, res){
+	static async postDbv(req, res, next){
 		try{
 			const dbvData = new desbravadores(req.body);
 			await dbvData.save();
@@ -39,7 +39,7 @@ class DbvController{
 		}
 	}
 
-	static async putDbv(req, res){
+	static async putDbv(req, res, next){
 		try{
 			const id = req.params.id;
 			const updatedDbv = await desbravadores.findByIdAndUpdate(id, {$set: req.body});
@@ -54,7 +54,7 @@ class DbvController{
         
 	}
 
-	static async deleteDbv(req, res){
+	static async deleteDbv(req, res, next){
 		try{
 			const id = req.params.id;
 

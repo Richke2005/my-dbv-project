@@ -1,7 +1,7 @@
 const { classes } = require("../models/index");
 
 class ClassesController{
-	static async getClasses(req, res){
+	static async getClasses(req, res, next){
 		try{
 			const classesData = await classes.find();
 			res.status(200).send(classesData);
@@ -10,7 +10,7 @@ class ClassesController{
 		}
 	}
 
-	static async getClassesById(req, res){
+	static async getClassesById(req, res, next){
 		try{
 			const id = req.params.id;
 			const searchedClasses = await classes
@@ -29,7 +29,7 @@ class ClassesController{
 		}
 	}
 
-	static async postClasses(req, res){
+	static async postClasses(req, res, next){
 		try{
 			const classesData = new classes(req.body);
 			await classesData.save();
@@ -40,7 +40,7 @@ class ClassesController{
 		}
 	}
 
-	static async putClasses(req, res){
+	static async putClasses(req, res, next){
 		try{
 			const id = req.params.id;
 			const updatedClasses = await classes.findByIdAndUpdate(id, {$set: req.body});
@@ -55,7 +55,7 @@ class ClassesController{
         
 	}
 
-	static async deleteClasses(req, res){
+	static async deleteClasses(req, res, next){
 		try{
 			const id = req.params.id;
 
