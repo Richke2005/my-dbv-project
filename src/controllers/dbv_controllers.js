@@ -24,7 +24,7 @@ class DbvController{
 			}
 
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 
@@ -35,7 +35,7 @@ class DbvController{
 
 			res.status(201).send({message: `${dbvData} created successfully`});
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 
@@ -49,7 +49,7 @@ class DbvController{
 				res.status(401).send({message: `dbv wih id ${id} was not found`});
 			}
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
         
 	}
@@ -65,7 +65,7 @@ class DbvController{
 				res.status(401).send({message: `dbv wih id ${id} was not found`});
 			}
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 }

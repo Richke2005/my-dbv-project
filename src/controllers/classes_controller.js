@@ -6,7 +6,7 @@ class ClassesController{
 			const classesData = await classes.find();
 			res.status(200).send(classesData);
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error);
 		}
 	}
 
@@ -25,7 +25,7 @@ class ClassesController{
 			}
 
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 
@@ -36,7 +36,7 @@ class ClassesController{
 
 			res.status(201).send({message: `${classesData} created successfully`});
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 
@@ -50,7 +50,7 @@ class ClassesController{
 				res.status(401).send({message: `Classes wih id ${id} was not found`});
 			}
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
         
 	}
@@ -66,7 +66,7 @@ class ClassesController{
 				res.status(401).send({message: `Classes with id ${id} was not found`});
 			}
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 }

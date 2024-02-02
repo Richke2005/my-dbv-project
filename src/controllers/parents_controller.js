@@ -6,7 +6,7 @@ class ParentsController{
 			const parentsData = await parents.find();
 			res.status(200).send(parentsData);
 		} catch (error) {
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 
@@ -22,7 +22,7 @@ class ParentsController{
 			}
 
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 
@@ -33,7 +33,7 @@ class ParentsController{
 
 			res.status(201).send({message: `${parentsData} created successfully`});
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 
@@ -47,7 +47,7 @@ class ParentsController{
 				res.status(401).send({message: `Parents wih id ${id} was not found`});
 			}
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
         
 	}
@@ -63,7 +63,7 @@ class ParentsController{
 				res.status(401).send({message: `Parents wih id ${id} was not found`});
 			}
 		}catch(error){
-			res.status(401).send(error.message);
+			next(error)
 		}
 	}
 }
