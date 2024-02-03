@@ -1,4 +1,5 @@
-const { desbravadores } = require("../models/index");
+const { desbravadores } = require("../models/");
+const { dbvSearch } = require("../services/searches/");
 
 class DbvController{
 	static async getDbv(req, res, next){
@@ -26,6 +27,25 @@ class DbvController{
 		}catch(error){
 			next(error)
 		}
+	}
+
+	static async getDbvBySearch(req, res, next){
+		try{
+			const parameters = req.query;
+			const search = dbvSearch(parameters);
+
+			if(search !== null){
+				const apiSearch = await desbravadores.find(search);
+				res.status(200).send(apiSearch);
+
+				next()
+			}else{
+				res.status(200).send([]);
+			}
+
+		}catch(error){
+			next(error);
+		};
 	}
 
 	static async postDbv(req, res, next){
