@@ -1,6 +1,6 @@
 const { desbravadores } = require("../../models/");
 
-async function dbvSearch(parameters){
+function dbvSearch(parameters){
 	const { name, email, frequency, age } = parameters;
 
 	let search = {};

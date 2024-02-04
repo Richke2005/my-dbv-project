@@ -34,11 +34,9 @@ class DbvController{
 			const parameters = req.query;
 			const search = dbvSearch(parameters);
 
-			if(search !== null){
+			if(search){
 				const apiSearch = await desbravadores.find(search);
 				res.status(200).send(apiSearch);
-
-				next()
 			}else{
 				res.status(200).send([]);
 			}
