@@ -26,9 +26,18 @@ const parentsSchema = mongoose.Schema({
 	
 	email: {type: String},
 	address: {
-		street: {type: String},
-		number: {type: String},
-		cep: {type: String}
+		type: Object,
+		street: {
+			type: String,
+			required: [true, "Street must be provided"]
+		},
+		number: {
+			type: String,
+			required: [true, "Number must be provided"]
+		},
+		cep: {type: String},
+
+		required: [true, "An address must be provided"]
 	}
 },
 {
