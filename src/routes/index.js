@@ -2,6 +2,7 @@ const express = require("express");
 const dbvRoute = require("./desbravadores");
 const parentsRoute = require("./parents");
 const classesRoute = require("./classes");
+const announcementRoute = require("./announcement");
 
 function routes(app){
 	app.route("/").get((req, res) =>{
@@ -12,7 +13,8 @@ function routes(app){
 		express.json(),
 		dbvRoute,
 		parentsRoute, 
-		classesRoute
+		classesRoute,
+		announcementRoute
 	);
 }
 

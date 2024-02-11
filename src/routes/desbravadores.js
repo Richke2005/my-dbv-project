@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const DbvController = require("../controllers/dbv_controllers");
+const { DbvController } = require("../controllers/");
 
 
 const router = Router();
