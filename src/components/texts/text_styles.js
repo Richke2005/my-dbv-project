@@ -16,12 +16,35 @@ const textStyle = StyleSheet.create({
 		color: "white"
 	},
 
-	normalText:{
+	darkTitle: {
+		margin: 2,
+		fontSize: 20,
+		fontWeight: "bold",
+		color: "black"
+	},
+
+	lightText:{
 		margin: 2,
 		fontSize: 15,
 		fontWeight: "normal",
 		color: "white"
+	},
+
+	italicText:{
+		margin: 2,
+		fontSize: 15,
+		fontWeight: "normal",
+		fontStyle: "italic"
+	},
+
+	italicLihgtText: {
+		margin: 2,
+		fontSize: 15,
+		fontWeight: "normal",
+		color: "white",
+		fontStyle: "italic"
 	}
+
 });
 
 export default textStyle;

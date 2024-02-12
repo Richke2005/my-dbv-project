@@ -12,19 +12,12 @@ function Home() {
 			<View style={styles.container}>
 				<VerseOfDay/>
 					<View style={styles.window}>
-						<Announcement {...announcement}/>
+						<Announcement 
+						{...announcement}/>
 						<MyClass
 						name="Pioneiros"
 						task="Terminar leitura biblica"
 						/>
-						<MyClass
-						name="Pesquisadores"
-						task="Terminar pesquisa"/>
-					<Announcement/>
-					<Announcement/>
-					<MyClass
-					name="Guia"
-					task="Acampar no mato"/>
 				</View>
 			</View>
 		</ScrollView>
