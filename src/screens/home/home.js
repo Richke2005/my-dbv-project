@@ -1,7 +1,9 @@
 import React from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
-import VerseOfDay from "../../components/contentBox/verse_of_day";
-import WidgetWindow from "./components/widgets_window";
+import VerseOfDay from "../../patterns/contentBoxes/verse_of_day";
+import Announcement from "../../patterns/contentBoxes/announcement";
+import MyClass from "../../patterns/contentBoxes/my_class";
+import announcement from "../../mocks/announcements";
 
 
 function Home() {
@@ -9,7 +11,21 @@ function Home() {
 		<ScrollView>
 			<View style={styles.container}>
 				<VerseOfDay/>
-				<WidgetWindow/>
+					<View style={styles.window}>
+						<Announcement {...announcement}/>
+						<MyClass
+						name="Pioneiros"
+						task="Terminar leitura biblica"
+						/>
+						<MyClass
+						name="Pesquisadores"
+						task="Terminar pesquisa"/>
+					<Announcement/>
+					<Announcement/>
+					<MyClass
+					name="Guia"
+					task="Acampar no mato"/>
+				</View>
 			</View>
 		</ScrollView>
 	);
@@ -21,6 +37,13 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 		alignItems: "center",
 	},
+	window: {
+		flex: 1,
+		width: "85%",
+		minWidth: "50%",
+		flexDirection: "row",
+		flexWrap: "wrap"
+	}
 });
 
 export default Home;

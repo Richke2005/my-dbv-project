@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import textStyle from "../texts/text_styles";
+import textStyle from "../../components/texts/text_styles";
 
 // eslint-disable-next-line react/prop-types
 const MyClass = ({ name, task})=>{

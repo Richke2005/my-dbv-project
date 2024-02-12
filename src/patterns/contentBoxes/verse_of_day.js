@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import {
 	StyleSheet, Image, Text, View,
 } from "react-native";
-import { getRandomVerse, curatedPhoto } from "../../services/index";
-import textStyle from "../texts/text_styles";
+import { getRandomVerse, curatedPhoto } from "../../infra/services/";
+import textStyle from "../../components/texts/text_styles";
 
 function VerseOfDay() {
 	const [verseData, setVerse] = useState([]);

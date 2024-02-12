@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import textStyle from "../texts/text_styles";
+import textStyle from "../../components/texts/text_styles";
 
-const Announcement = ()=>{
+const Announcement = ({title, text})=>{
 	return<View style={style.announcementView}
 		onPointerDown={()=>console.log("Anounccement")}>
-		<Text style={textStyle.title}>Announcement</Text>
+		<Text style={textStyle.title}>{title}</Text>
+		<Text style={textStyle.normalText}>{text}</Text>
 	</View>;
 };
 
