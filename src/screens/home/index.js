@@ -15,7 +15,7 @@ function Home() {
 						<Announcement 
 						{...announcement}/>
 						<MyClass
-						name="Pioneiros"
+						className="Pioneiros"
 						task="Terminar leitura biblica"
 						/>
 				</View>

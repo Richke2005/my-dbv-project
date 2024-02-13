@@ -19,7 +19,8 @@ const Announcement = ({title, text})=>{
 const style = StyleSheet.create({
 	announcementView:{
 		position: "relative",
-		margin: 5,
+		marginTop: 5,
+		marginBottom: 5,
 		width: "100%",
 		padding: 20,
 		flexDirection: "row",

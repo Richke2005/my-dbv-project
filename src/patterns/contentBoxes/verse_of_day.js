@@ -76,7 +76,8 @@ function VerseOfDay() {
 const style = StyleSheet.create({
 	verseView: {
 		position: "relative",
-		margin: 10,
+		marginTop: 10,
+		marginBottom: 5,
 		width: "85%",
 		height: 200,
 		maxHeight: 300,

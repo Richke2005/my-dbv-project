@@ -10,6 +10,7 @@ const textStyle = StyleSheet.create({
 	},
 
 	title:{
+		padding: 5,
 		margin: 2,
 		fontSize: 20,
 		fontWeight: "bold",

@@ -1,28 +1,55 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, Pressable, StyleSheet } from "react-native";
+import * as RootNavigation from "../../navigation/root_navigation";
+import ProgressBar from "../../components/progress-icons/progress_bar";
 import image from "../../../assets/images/pathfinders_lenço.png"
 import textStyle from "../../components/texts/text_styles";
 
 // eslint-disable-next-line react/prop-types
-const MyClass = ({name, task})=>{
-	return<View style={style.myClassView}>
-		<View style={{ height: 150}}>
-			<Image source={image} style={{width: "100%", height: "100%", borderTopLeftRadius: 10, borderTopRightRadius: 10}}/>
+const MyClass = ({className, task})=>{
+	return<Pressable
+	 	style={style.myClassView}
+		onPress={()=> RootNavigation.navigate("myClass")}>
+		<View style={style.imageView}>
+			<Image source={image} style={style.image}/>
+			<Text style={textStyle.title}>My Class</Text>
 		</View>
-		<View style={{padding: 10, }}>
-		<Text style={textStyle.darkTitle}>{name}</Text>
+		<View style={style.contentView}>
+		<Text style={textStyle.darkTitle}>{className}</Text>
 		<Text>{task}</Text>
+		<ProgressBar
+		width={230}
+		height={10}
+		progress={30}
+		/>
 		</View>
-	</View>;
+	</Pressable>;
 };
 
 const style = StyleSheet.create({
 	myClassView:{
 		position: "relative",
-		margin: 5,
+		marginTop: 5,
+		marginBottom: 5,
 		width: "80%",
 		borderRadius: 10,
 		backgroundColor: "white"
+	},
+
+	imageView:{
+		height: 150
+	},
+
+	image:{
+		width: "100%", 
+		height: "100%", 
+		position: "absolute",
+		borderTopLeftRadius: 10, 
+		borderTopRightRadius: 10
+	},
+
+	contentView:{
+		padding: 10
 	}
 });
 
