@@ -6,7 +6,7 @@ import { navigationRef } from "./src/navigation/root_navigation";
 import Login from "./src/screens/login/";
 import Home from "./src/screens/home/";
 import MyClass from "./src/screens/my-class";
-import NavBar from "./src/components/navBar/nav_bar";
+import NavBar from "./src/patterns/navBar/";
 
 const Stack = createNativeStackNavigator();
 
