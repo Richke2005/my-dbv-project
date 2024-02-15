@@ -11,4 +11,7 @@ coverage/
 #credentials of my application
 *.env
 
+#expo 
+.expo
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.

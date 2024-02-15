@@ -1,7 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const BaseError = require("../../errors/base_error");
-const WrongRequest = require("../../errors/wrong_request");
-const ValidationError = require("../../errors/validation_error");
+const { BaseError, WrongRequest, ValidationError } = require("../../errors/");
 
 
 // eslint-disable-next-line no-unused-vars

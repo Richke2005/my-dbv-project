@@ -4,7 +4,7 @@ const URI = process.env.URI;
 
 function connect(){
 	mongoose.connect(URI);
-
+	//To access other database and close conn turn const conn above to public 
 	const conn = mongoose.connection;
 
 	conn.on("error", err =>{
