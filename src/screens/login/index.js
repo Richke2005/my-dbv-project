@@ -11,7 +11,7 @@ const Login = ({navigation})=>{
 
 	return<View style={styles.container}>
 		<View style={styles.loginBox}>
-			<Text style={{fontSize: 30, color: "black", letterSpacing: 3, textAlign: "center"}}>Primícias do amanhã</Text>
+			<Text style={{fontSize: 30, color: "black", letterSpacing: 3, textAlign: "center"}}>My Club</Text>
 			<TextInput
 				//Animate with push up
 				onFocus={()=> console.log("Enter email")}
