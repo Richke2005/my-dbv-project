@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { navigationRef } from "./src/navigation/root_navigation";
 import Login from "./src/screens/login/";
 import Home from "./src/screens/home/";
+import Profile from "./src/screens/profile";
 import MyClass from "./src/screens/my-class";
 import NavBar from "./src/patterns/navBar/";
 
@@ -25,6 +26,10 @@ export default function App() {
 					component={Home}
 					options={{title: "Home"}}
 				/>
+				<Stack.Screen
+				name="profile"
+				component={Profile}
+				options={{title: "Profile"}}/>
 				<Stack.Screen
 				name="myClass"
 				component={MyClass}

@@ -25,7 +25,7 @@ const NavBar = ()=>{
 		</Pressable>
 		
 		<Pressable
-			onPress={()=> console.log("pressed")}>
+			onPress={()=> RootNavigation.navigate("profile")}>
 			<Icon
 				name="user"
 				size={30}
