@@ -97,7 +97,7 @@ const style = StyleSheet.create({
 		padding: 15,
 		display: "flex",
 		justifyContent: "space-around",
-	},
+	}
 });
 
 export default VerseOfDay;
