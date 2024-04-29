@@ -1,4 +1,3 @@
-// import axios from "axios";
 
 class BibleServices{
 	#API = "https://www.abibliadigital.com.br/api"
