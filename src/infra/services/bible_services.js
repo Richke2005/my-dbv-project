@@ -1,7 +1,7 @@
 
 class BibleServices{
-	#API = "https://www.abibliadigital.com.br/api"
-	#bibleVersion = "nvi";
+	#API = "https://www.abibliadigital.com.br/api";
+	#bibleVersion;
 	#VERSE_INDEX = new Date().getDate();
 	#DAYLY_VERSES = [
 		`sl/23/2`,
@@ -34,10 +34,14 @@ class BibleServices{
 		`pv/16/3`,
 		`sl/31/1`,
 		`pv/19/17`
-	]
+	];
 	
 	constructor(bibleVersion){
 		this.#bibleVersion = bibleVersion;
+	}
+	
+	constructor(){
+		this.#bibleVersion = "nvi"
 	}
 
 	async getVerseOfDay(){
@@ -81,9 +85,5 @@ class BibleServices{
 	}
 
 }
-
-
-new BibleServices("nvi").getVerseOfDay().then(e => console.log(e))
-
 
 export default BibleServices;
