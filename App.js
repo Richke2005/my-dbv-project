@@ -27,13 +27,13 @@ export default function App() {
 					options={{title: "Home"}}
 				/>
 				<Stack.Screen
-				name="profile"
-				component={Profile}
-				options={{title: "Profile"}}/>
+					name="profile"
+					component={Profile}
+					options={{title: "Profile"}}/>
 				<Stack.Screen
-				name="myClass"
-				component={MyClass}
-				options={{title: "My class", }}/>
+					name="myClass"
+					component={MyClass}
+					options={{title: "My class", }}/>
 			</Stack.Navigator>
 			<NavBar/>
 		</NavigationContainer>

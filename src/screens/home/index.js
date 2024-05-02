@@ -4,6 +4,7 @@ import VerseOfDay from "../../patterns/contentBoxes/verse_of_day";
 import Announcement from "../../patterns/contentBoxes/announcement";
 import MyClass from "../../patterns/contentBoxes/my_class";
 import announcement from "../../mocks/announcements";
+import dbvData from "../../mocks/dbv";
 
 
 function Home() {
@@ -11,13 +12,13 @@ function Home() {
 		<ScrollView>
 			<View style={styles.container}>
 				<VerseOfDay/>
-					<View style={styles.window}>
-						<Announcement 
-						{...announcement}/>
-						<MyClass
-						className="Pioneiros"
-						task="Terminar leitura biblica"
-						/>
+				<View style={styles.window}>
+					<Announcement 
+						{...announcement}
+					/>
+					<MyClass
+						{...dbvData}
+					/>
 				</View>
 			</View>
 		</ScrollView>

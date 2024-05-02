@@ -3,46 +3,31 @@ import { useEffect, useState } from "react";
 import {
 	StyleSheet, Image, Text, View,
 } from "react-native";
-import { getRandomVerse, curatedPhoto } from "../../infra/services/";
-import background from "../../../assets/images/verse_of_day_image.jpg"
+import { BibleServices } from "../../infra/services/";
+import background from "../../../assets/images/verse_of_day_image.jpg";
+import CheckButton from "../../components/check-button/check_buton";
 import Loading from "../../components/loading/loading";
 import textStyle from "../../components/texts/text_styles";
 
 //TODO: remake the requests when app is advenced
 function VerseOfDay() {
-	const [verseData, setVerse] = useState([]);
+	const [verseData, setVerse] = useState({});
 	//const [imageData, setImage] = useState([]);
-	const {
-		book, chapter, number, text,
-	} = verseData;
-
+	const { book, chapter, number, text } = verseData;
 	// const searchedImages = imageData.map( image => {
 	// 	const { src: photoSources } = image;
 	// 	const { original: originalPhoto } = photoSources;
 	// 	return originalPhoto;
 	// });
-
 	
 	useEffect(() => {
 		fetchData();
 	}, []);
 
 	function fetchData() {	
-		/*getRandomVerse("acf")
-			.then((data) =>*/ setVerse({ 
-				book: {
-					name: "Isaias"
-				},
-				chapter: "4",
-				number: "5",
-				text: " E criará o Senhor sobre todo o lugar do monte de Sião, e sobre as suas assembléias, uma nuvem de dia e uma fumaça, e um resplendor de fogo flamejante de noite; porque sobre toda a glória haverá proteção."
-			})//);
-
-		// curatedPhoto(1)
-		//  	.then(data => {
-		//  		const { photos } = data;
-		//  		setImage();
-		//  	});
+		new BibleServices()
+			.getVerseOfDay()
+			.then( data => setVerse(data));
 	}
 
 	if (book == undefined && text == undefined) {
@@ -68,7 +53,9 @@ function VerseOfDay() {
 				<View>
 					<Text style={textStyle.italicLihgtText}>{text}</Text>
 				</View>
+				<CheckButton style={style.checkButtonView}>Complete</CheckButton>
 			</View>
+			
 		</View>
 	);
 }
@@ -97,7 +84,12 @@ const style = StyleSheet.create({
 		padding: 15,
 		display: "flex",
 		justifyContent: "space-around",
-	}
+	},
+
+	checkButtonView: {
+		alignSelf: "flex-end",
+		
+	},
 });
 
 export default VerseOfDay;
