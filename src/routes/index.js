@@ -1,21 +1,15 @@
 const express = require("express");
-const dbvRoute = require("./desbravadores");
-const parentsRoute = require("./parents");
-const classesRoute = require("./classes");
-const announcementRoute = require("./announcement");
+const fathersRoute = require("./fathersRoute");
 
 function routes(app){
-	app.route("/").get((req, res) =>{
-		res.status(200).send({message: "DBV API, for every pathfinder"});
-	});
+    app.route("/").get((req, res)=>{
+        res.status(200).send({message: "Welcome to my API"});
+    });
 
-	app.use(
-		express.json(),
-		dbvRoute,
-		parentsRoute, 
-		classesRoute,
-		announcementRoute
-	);
+    app.use(
+        express.json(),
+        fathersRoute
+    );
 }
 
 module.exports = routes;
