@@ -1,5 +1,6 @@
 const express = require("express");
-const fathersRoute = require("./fathersRoute");
+const fathersRoute = require("./fathersRoute.js");
+const pathfindersRoute = require("./pathfindersRoute.js");
 
 function routes(app){
     app.route("/").get((req, res)=>{
@@ -8,7 +9,8 @@ function routes(app){
 
     app.use(
         express.json(),
-        fathersRoute
+        fathersRoute,
+        pathfindersRoute
     );
 }
 

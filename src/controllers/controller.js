@@ -38,7 +38,10 @@ class Controller{
             const { id } = req.params;
             const updatedData = req.body;
             const data = await this.service.updateReg(updatedData, Number.parseInt(id));
-            return res.status(200).send(data);
+            if(!data)
+                return res.status(200).send({message: "erro ao atualizar registro"});
+
+            return res.status(200).send({message: `Total de ${data} registros atualizados com sucesso`});
         }catch(error){
             return res.status(500).send({message: error.message});
         }
