@@ -7,7 +7,7 @@ class PathfinderService extends Services{
 
     //override
     // //make one method to return the parents
-    // getAllAtData(){
+    // async getAllAtData(){
     //     return super.getAllAtData()
     //     .then(pathfinders => pathfinders
     //         .map(pathfinder => pathfinder.getFather()));
@@ -15,13 +15,17 @@ class PathfinderService extends Services{
         
     // }
     //make one take parents by pathfinder method
-    // async getParentsByPathfinder(pathfinderId){
-    //     const pathfinder = await super.getDataById(pathfinderId);
-    //     const listaMatriculas = await pathfinder.getAulasMatriculadas();
-    //     return listaMatriculas;
-    // }
-    //Pessoa.getCursos() existe
-
+    
+    async getParentsByPathfinderId(pathfinderId){
+        return super.getDataById(pathfinderId)
+        .then( async (pathfinder) => {
+            return {
+                pathfinder: pathfinder.pathfinder_name,
+                father: await pathfinder.getFather(),
+                mother: await pathfinder.getMother()
+            }
+        });
+    }
 }
 
 module.exports = PathfinderService;
