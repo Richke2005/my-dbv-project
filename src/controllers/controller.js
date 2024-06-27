@@ -25,7 +25,7 @@ class Controller{
 
     async postData(req, res){
         try{
-            reg = req.body;
+            const reg = req.body;
             const data = await this.service.createNewReg(reg);
             return res.status(201).send(data);
         }catch(error){
