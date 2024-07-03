@@ -9,6 +9,15 @@ class PathfinderController extends Controller {
     }
 
     async getPathfinderParents(req, res){
+        try {
+            const pathfinderParents = await pathfinderService.getParents()
+            return res.status(200).send(pathfinderParents);
+        }catch(error){
+            return res.status(500).send({message: error.message});
+        }
+    }
+
+    async getPathfinderParentsById(req, res){
         try{
             const { id } = req.params;
             const pathfindersParents = await pathfinderService.getParentsByPathfinderId(id);

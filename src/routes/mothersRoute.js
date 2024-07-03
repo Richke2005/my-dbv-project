@@ -6,6 +6,7 @@ const router = Router();
 //do mais abrangente ao mais específico
 router
 .get('/mothers', (req, res) => motherController.getAll(req, res))
+.get('/mothers/:id/address', (req, res) => motherController.getMotherAddress(req, res))
 .get('/mothers/:id', (req, res) => motherController.getById(req, res))
 .post('/mothers', (req, res) => motherController.postData(req, res))
 .put('/mothers/:id', (req, res) => motherController.updateData(req, res))
