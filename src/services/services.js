@@ -1,6 +1,6 @@
 const dataSource = require("../database/models/index");
 
-class Service{
+class Services{
     constructor(modelName){
         this.modelName = modelName;
     }
@@ -40,6 +40,6 @@ class Service{
     }
 }
 
-module.exports = Service;
+module.exports = Services;
 
 //service pega e abstrai as funções da camada de modelos/banco para distribuir para aplicação

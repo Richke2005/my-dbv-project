@@ -7,15 +7,20 @@ class PathfinderService extends Services{
     //make one method to return the parents
     async getParents(){
         return super.getAllAtData()
-        .then(pathfinders => pathfinders
-            .map(pathfinder => {
+        .then(pathfinders => {
+            const pathfinderParents = pathfinders.map( async pathfinder => {
                 return {
                     pathfinder_name: pathfinder.pathfinder_name,
-                    email: pathfinder.email,
-                    talents: pathfinder.talents,
-                }
-            })
-        );
+                    father: await pathfinder.getFather({
+                        attributes: ["id", "father_name"]
+                    }),
+                    mother: await pathfinder.getMother({
+                        attributes: ["id", "mother_name"]
+                    })
+                };
+            });
+            return Promise.all(pathfinderParents);
+        });
     }
     
     async getParentsByPathfinderId(pathfinderId){
