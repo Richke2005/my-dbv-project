@@ -27,6 +27,10 @@ const LoginBox = ({title = "MyClub", navigation, navigateTo})=>{
 				placeholder="Your password"
 				value={password}
 			/>
+			<View style={styles.bottomView}>
+				<Text style={{fontSize: 12, color: "grey"}}>Don't have an account? Sign up now</Text>
+            	<Text onPress={()=> navigation.navigate(navigateTo)}>Sign up</Text>
+        	</View>
 			<Icon.Button
 				name="login" 
 				size={30}
@@ -52,7 +56,13 @@ const styles = StyleSheet.create({
 		boxShadow: `3px ${StyleSheet.hairlineWidth}px ${StyleSheet.hairlineWidth}px #0000001A`,
 		alignItems: "center",
 		justifyContent: "space-around"
-	}
+	},
+
+	bottomView: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 10
+    }
 });
 
 export default LoginBox;

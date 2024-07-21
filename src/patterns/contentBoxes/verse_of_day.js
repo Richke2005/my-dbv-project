@@ -43,9 +43,7 @@ function VerseOfDay() {
 				style={style.backgroundImage}
 				//source={{uri: searchedImages[0]}}
 			/>
-			<View
-				style={style.contentView}
-			>
+			<View style={style.contentView}>
 				<View>
 					<Text style={textStyle.lightText}>versículo do dia:</Text>
 					<Text style={textStyle.VerseOfDay}>{`${book.name} ${chapter}:${number}`}</Text>
@@ -55,7 +53,6 @@ function VerseOfDay() {
 				</View>
 				<CheckButton style={style.checkButtonView}>Complete</CheckButton>
 			</View>
-			
 		</View>
 	);
 }
@@ -63,11 +60,9 @@ function VerseOfDay() {
 const style = StyleSheet.create({
 	verseView: {
 		position: "relative",
-		marginTop: 10,
-		marginBottom: 5,
-		width: "85%",
-		height: 200,
-		maxHeight: 300,
+		width: "100%",
+		minHeight: 200,
+		maxHeight: 350,
 		color: "white"
 	},
 
@@ -75,7 +70,6 @@ const style = StyleSheet.create({
 		width: "100%",
 		height: "100%",
 		position: "absolute",
-		objectFit: "cover",
 		borderRadius: 10,
 	},
 

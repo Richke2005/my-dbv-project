@@ -18,7 +18,7 @@ const MyClass = ({className, task, progress})=>{
 			<Text style={textStyle.darkTitle}>{className}</Text>
 			<Text>{task}</Text>
 			<ProgressBar
-				width={230}
+				width={"100%"}
 				height={10}
 				progress={progress}
 			/>
@@ -29,9 +29,7 @@ const MyClass = ({className, task, progress})=>{
 const style = StyleSheet.create({
 	myClassView:{
 		position: "relative",
-		marginTop: 5,
-		marginBottom: 5,
-		width: "80%",
+		width : "100%",
 		borderRadius: 10,
 		backgroundColor: "white"
 	},

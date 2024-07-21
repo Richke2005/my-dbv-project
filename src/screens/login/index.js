@@ -6,13 +6,15 @@ import LoginBox from "../../patterns/loginBox";
 const Login = ({navigation})=>{
 	return<View style={styles.container}>
 		<LoginBox
-		navigation={navigation} 
-		navigateTo="home"/>
-	</View>;
+			navigation={navigation} 
+			navigateTo="home"
+		/>
+		</View>
 };
 
 const styles = StyleSheet.create({
 	container: {
+        width: "100%",
 		flex: 1,
 		backgroundColor: "#fff",
 		alignItems: "center",
