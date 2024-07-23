@@ -22,7 +22,15 @@ module.exports = (sequelize, DataTypes) => {
   Mother.init({
     mother_name: DataTypes.STRING(60),
     phone_number: DataTypes.CHAR(11),
-    email: DataTypes.STRING(60)
+    email: {
+      type: DataTypes.STRING(60),
+      validate: {
+        isEmail: {
+          args: true,
+          msg: "Invalid email address"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Mother',

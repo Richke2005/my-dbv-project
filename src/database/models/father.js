@@ -21,8 +21,20 @@ module.exports = (sequelize, DataTypes) => {
   
   Father.init({
     father_name: DataTypes.STRING(60),
-    phone_number: DataTypes.CHAR(11),
-    email: DataTypes.STRING(60)
+    phone_number: {
+      type: DataTypes.CHAR(11),
+      allowNull: false,
+      unique: true
+    },
+    email: {
+      type: DataTypes.STRING(60),
+      validate: {
+        isEmail: {
+          args: true,
+          msg: "Invalid email address"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Father',

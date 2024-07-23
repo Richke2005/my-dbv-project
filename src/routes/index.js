@@ -4,8 +4,8 @@ const fathersRoute = require("./fathersRoute.js");
 const pathfindersRoute = require("./pathfindersRoute.js");
 
 function routes(app){
-    app.route("/").get((req, res)=>{
-        res.status(200).send({message: "Welcome to my API"});
+    app.route("/api/dbv/v1").get((req, res)=>{
+        res.status(200).send({message: "Welcome to pathfinders API"});
     });
 
     app.use(

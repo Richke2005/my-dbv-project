@@ -13,8 +13,8 @@ class Services{
         return dataSource[this.modelName].findByPk(id);
     }
 
-    async createNewReg(reg){
-        return dataSource[this.modelName].create(reg);
+    async createNewReg(reg, fieldAttributes){
+        return dataSource[this.modelName].create(reg, fieldAttributes);
     }
 
     async updateReg(updatedData, id){

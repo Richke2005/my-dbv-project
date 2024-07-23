@@ -19,7 +19,11 @@ module.exports = (sequelize, DataTypes) => {
   ParentAddress.init({
     street: DataTypes.STRING,
     number: DataTypes.CHAR(10),
-    cep: DataTypes.CHAR(8)
+    cep: {
+      type: DataTypes.CHAR(8),
+      allowNull: false, 
+      unique: true
+    }
   }, {
     sequelize,
     modelName: 'ParentAddress',

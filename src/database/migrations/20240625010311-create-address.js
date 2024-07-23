@@ -25,10 +25,14 @@ module.exports = {
         type: Sequelize.STRING
       },
       number: {
-        type: Sequelize.CHAR(10)
+        type: Sequelize.CHAR(10),
+        allowNull: false,
+        unique: true
       },
       cep: {
-        type: Sequelize.CHAR(8)
+        type: Sequelize.CHAR(8),
+        allowNull: false,
+        unique: true
       },
       createdAt: {
         allowNull: false,
