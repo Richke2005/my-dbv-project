@@ -1,43 +1,24 @@
-'use strict';
+const mongoose = require("mongoose");
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const process = require('process');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
+const bookResponseSchema = require("./bookResponse.js");
+const classSchema = require("./class.js");
+const classbookSchema = require("./classBook.js");
+const clubSchema = require("./club.js");
+const leadershipSchema = require("./leadership.js");
+const pathfinderSchema = require("./pathfinder.js");
+const postSchema = require("./post.js");
+const unitSchema = require("./unit.js");
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
-    );
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
+// Defining collections and models
+mongoose.model("book_responses", bookResponseSchema);
+mongoose.model("classes", classSchema);
+mongoose.model("class_books", classbookSchema);
+mongoose.model("clubs", clubSchema);
+mongoose.model("leaderships", leadershipSchema);
+mongoose.model("pathfinders", pathfinderSchema);
+mongoose.model("posts", postSchema);
+mongoose.model("units", unitSchema);
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+module.exports = mongoose;

@@ -1,45 +1,38 @@
-const dataSource = require("../database/models/index");
+const DataSource = require("../database/models/index.js");
 
-class Services{
-    constructor(modelName){
-        this.modelName = modelName;
-    }
-    
-    async getAllAtData(){
-        return dataSource[this.modelName].findAll();
+class Service{
+    #service;
+    constructor(serviceName){
+        this.#service = serviceName;
     }
 
-    async getDataById(id){
-        return dataSource[this.modelName].findByPk(id);
+    async getAllReg(){
+        return DataSource.models[this.#service].find();
     }
 
-    async createNewReg(reg, fieldAttributes){
-        return dataSource[this.modelName].create(reg, fieldAttributes);
+    async getRegBySearch(query = {}, projection = {}, options = {}){
+        return DataSource.models[this.#service].find(query, projection, options);
     }
 
-    async updateReg(updatedData, id){
-        const listOfUpdatedData = await dataSource[this.modelName].update(updatedData, {
-            where: {id: id}
-        });
+    async getRegByAggregation(aggregation = []){
+        return DataSource.models[this.#service].aggregate(aggregation);
+    }
 
-        if(listOfUpdatedData[0] === 0){
-            return false;
-        }
-        return listOfUpdatedData;
+    async getRegById(id){
+        return DataSource.models[this.#service].findById(id);
+    }
+
+    async postReg(doc){
+        return DataSource.models[this.#service].create(doc);
+    }
+
+    async updateReg(id, doc){
+        return DataSource.models[this.#service].findByIdAndUpdate(id, {$set: doc});
     }
 
     async deleteReg(id){
-        const dataExcluded = dataSource[this.modelName].destroy({
-            where: {id: id}
-        });
-
-        if(dataExcluded === 0){
-            return false;
-        }
-        return dataExcluded;
+        return DataSource.models[this.#service].findByIdAndDelete(id);
     }
 }
 
-module.exports = Services;
-
-//service pega e abstrai as funções da camada de modelos/banco para distribuir para aplicação
+module.exports = Service;

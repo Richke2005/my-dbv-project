@@ -1,59 +1,56 @@
 class Controller{
+    #entityService
     constructor(service){
-        this.service = service;
+        this.#entityService = service;
     }
 
     async getAll(req, res){
         try{
-            const data = await this.service.getAllAtData();
-            return res.status(200).send(data);
-        }catch(err){
-            return res.status(500).send({message: err.message});
+            const documents = await this.#entityService.getAllReg();
+            return res.status(200).send(documents);
+        }catch(error){
+            return res.status(500).send({message: error});
         }
-     
     }
 
     async getById(req, res){
         try{
             const { id } = req.params;
-            const data = await this.service.getDataById(Number.parseInt(id));
-            return res.status(200).send(data);
+            const document = await this.#entityService.getRegById(id);
+            return res.status(200).send(document);
         }catch(error){
-            return res.status(500).send({message: error.message});
+            return res.status(400).send({message: error});
         }
     }
 
-    async postData(req, res){
+    async post(req, res){
         try{
-            const reg = req.body;
-            const data = await this.service.createNewReg(reg);
-            return res.status(201).send(data);
+            const doc = req.body;
+            const savedDocument = await this.#entityService.postReg(doc);
+            res.status(201).send({createdDoc: savedDocument});
         }catch(error){
-            return res.status(500).send({message: error.message});
+            return res.status(500).send({message: error});
         }
     }
 
-    async updateData(req, res){
+    async update(req, res){
         try{
             const { id } = req.params;
-            const updatedData = req.body;
-            const data = await this.service.updateReg(updatedData, Number.parseInt(id));
-            if(!data)
-                return res.status(200).send({message: "erro ao atualizar registro"});
-
-            return res.status(200).send({message: `Total de ${data} registros atualizados com sucesso`});
+            const doc = req.body;
+            await this.#entityService.updateReg(id, doc);
+            return res.status(200).send({message: `Document with ID: ${id} successfully updated`});
         }catch(error){
-            return res.status(500).send({message: error.message});
+            return res.status(500).send({message: error});
         }
     }
 
-    async deleteData(req, res){
+    async delete(req, res){
         try{
-            const { id } = req. params;
-            const data = await this.service.deleteReg(Number.parseInt(id));
-            return res.status(200).send(data);
+            const { id } = req.params;
+            const deletedDocument = await this.#entityService.deleteReg(id);
+            return res.status(200).send({deletedDoc: deletedDocument});
         }catch(error){
-            return res.status(500).send({message: error.message});
+            return res.status(500).send({message: error});
         }
     }
 }
