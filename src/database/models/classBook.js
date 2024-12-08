@@ -1,15 +1,25 @@
 const {Schema} = require('mongoose');
 
 const classbookSchema = new Schema({
-    class_name: {
-        type: String,
-        required: true,
-    },
-    book:[
-        {
-            question_id: Schema.Types.ObjectId,
-            requirement: String,
+    class: {
+        _id: {
+            type: Schema.Types.ObjectId,
+            ref: 'classes',
+            required: true
+        },
+        name: {
             type: String,
+            required: true,
+        }
+    },
+    book: [
+        {
+            requirement: {
+                type: String
+            },
+            type: {
+                type: String
+            }
         }
     ]
 },
