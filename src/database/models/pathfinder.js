@@ -29,7 +29,8 @@ const pathfinderSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'clubs',
     },
-    name: String
+    name: String,
+    image: String,
   },
   class: {
     _id: {
@@ -46,7 +47,8 @@ const pathfinderSchema = new Schema({
     },
     name: String,
     image: String
-  }
+  },
+  talents: Number
 },
 {
   timestamps: true,
