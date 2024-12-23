@@ -4,7 +4,7 @@ import ClassScreen from "../../../screens/ClassScreen/index.jsx";
 
 const Stack = createNativeStackNavigator();
 
-export default function HomeStack() {
+export default function ClassStack() {
     return (
         <Stack.Navigator initialRouteName="ClassScreen" 
         screenOptions={{headerShown: true}}>

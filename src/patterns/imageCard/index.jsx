@@ -1,21 +1,21 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Pressable, Text, Image, StyleSheet } from "react-native";
 
 export default function ImageCard({children, title, subtitle, text, img, style, ...props}) {
-    return<View style={[styles.cardContainer, style]} {...props}>
-        <Image source={img} style={{ 
+    return<Pressable style={[styles.cardContainer, style]} {...props}>
+        <Image source={{uri: img}} style={{ 
             position: "absolute", 
             width: "100%", 
             height: "100%", 
             borderRadius: 20
             }}/>
-        <View style={{width: "100%", height: "100%", justifyContent: "flex-start"}}>
+        <View style={styles.contentContainer}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subtitle}>{subtitle}</Text>
             <Text style={styles.text}>{text}</Text>
             {children}
         </View>
-    </View>
+    </Pressable>;
 }
 
 const styles = StyleSheet.create({
@@ -26,6 +26,12 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         minHeight: 200,
+    },
+    contentContainer: {
+        padding: 20,
+        width: "100%", 
+        height: "100%", 
+        justifyContent: "flex-start"
     },
     title: {
         padding: 5,

@@ -1,73 +1,118 @@
 import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, Animated, Easing } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BibleServices from "../../infra/services/digital_bible_api/bible_services";
 import PathfinderService from "../../infra/services/pathfinders_api/pathfinderService";
 import ImageCard from "../../patterns/imageCard";
-import {ActivityIndicator, MD2Colors, Card, Avatar, IconButton } from "react-native-paper";
-import image1 from "../../../assets/images/verse_of_day_image.jpg";
-import image2 from "../../../assets/images/pathfinders_lenço.png";
+import { ActivityIndicator, MD2Colors, Card, Avatar, IconButton, Button } from "react-native-paper";
 
 export default function HomeScreen() {
-	const [verseData, setVerse] = React.useState({});
 	const [pathfinderData, setPathfinderData] = React.useState({});
+	const [checkButton, setCheckButton] = React.useState(false);
 	const navigation = useNavigation();
-	
+	const scaleValue = React.useRef(new Animated.Value(1)).current;
+
 	React.useEffect(() => {
-		fetchVerse();
 		fetchPathfinderData();
 	}, []);
 
-	function fetchVerse() {
-		new BibleServices().getVerseOfDay()
-			.then((data) => setVerse(data))
-			.catch((error) => console.error(error));
-	}
-	
 	function fetchPathfinderData() {
-		new PathfinderService().getDataById("6750f5f8a03995fe58ea69a2")
+		new PathfinderService()
+			.getDataById("6750f5f8a03995fe58ea69a2")
 			.then((data) => setPathfinderData(data))
 			.catch((error) => console.error(error));
 	}
 
-	console.log(verseData)
+	function animateButton() {
+		Animated.sequence([
+			Animated.timing(scaleValue, {
+				toValue: 1.2,
+				duration: 200,
+				easing: Easing.ease,
+				useNativeDriver: true,
+			}),
+			Animated.timing(scaleValue, {
+				toValue: 1,
+				duration: 200,
+				easing: Easing.ease,
+				useNativeDriver: true,
+			}),
+		]).start();
+	}
 
-	//if(Object.keys(pathfinderData).length === 0) return <ActivityIndicator size={50} style={{marginTop: 20}} animating={true} color={MD2Colors.red800} />;
-	
+	function completeReading() {
+		if (!checkButton) {
+			setCheckButton(true);
+			const currentTalents = pathfinderData.talents;
+			new PathfinderService()
+				.putData("6750f5f8a03995fe58ea69a2", { talents: currentTalents + 10 })
+				.then(() => {
+					fetchPathfinderData();
+					animateButton();
+				});
+		}
+	}
+
+	if (Object.keys(pathfinderData).length === 0)
+		return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
+
 	return <ScrollView>
 			<ImageCard
-			title="Proverbs 3:5-6"
-			text="Trust in the Lord with all your heart
-    		and lean not on your own understanding;
-			6 in all your ways submit to him,
-    		and he will make your paths straight."
-			img={image1}
-			/>
+				title="Proverbs 3:5-6"
+				text="Trust in the Lord with all your heart
+    			and lean not on your own understanding;
+				in all your ways submit to him,
+    			and he will make your paths straight."
+				img="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-fall-nature-scenery-free-image.jpeg?w=600&quality=80"
+			>
+				<Animated.View
+					style={{
+						transform: [{ scale: scaleValue }],
+						alignSelf: "flex-end"
+					}}
+				>
+					<Button
+						icon="check"
+						mode="contained"
+						style={{
+							width: 150,
+							marginTop: 5,
+							marginBottom: 10,
+							marginRight: 5,
+						}}
+						onPress={() => completeReading()}
+					>
+						Complete
+					</Button>
+				</Animated.View>
+			</ImageCard>
 
-			<Card style={{margin: 10}}>
+			<Card style={{ margin: 10 }}>
 				<Card.Title
-				title="Anounciment"
-				titleStyle={{fontSize: 20}}
-				subtitle="subTitle"
-				left={(props) => <Avatar.Icon {...props} icon="folder" />}
-    			right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}/>
+					title="News"
+					titleStyle={{ fontSize: 20 }}
+					subtitle="subTitle"
+					left={(props) => <Avatar.Icon {...props} icon="heart" />}
+					right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
+				/>
 			</Card>
 
 			<ImageCard
-			title={"Falcões"}
-			subtitle={"Primímicias"}
-			img={image2}
-			style={{minHeight: 400}}
-			onTouchEnd={() => navigation.navigate("UnitScreen")}
+				title={pathfinderData.class.name}
+				subtitle={pathfinderData.club.name}
+				img={pathfinderData.class.image}
+				style={{ minHeight: 400 }}
+				onPress={() => navigation.navigate("ClassScreen")}
 			/>
 
 			<ImageCard
-			title="Companheiros"
-			img={image2}
-			style={{minHeight: 400}}
-			onTouchEnd={() => navigation.navigate("ClassScreen")}
+				title={pathfinderData.unit.name}
+				subtitle={pathfinderData.club.name}
+				img={pathfinderData.unit.image}
+				style={{ minHeight: 400 }}
+				onPress={() => navigation.navigate("UnitScreen")}
 			/>
-	</ScrollView>;
+		</ScrollView>;
 }
 
 const styles = StyleSheet.create({
