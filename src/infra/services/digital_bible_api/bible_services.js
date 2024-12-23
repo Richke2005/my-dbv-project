@@ -48,9 +48,9 @@ class BibleServices{
 				"Content-Type": "application/json",
 			}
 		})
-			.catch(function(err) {
-				console.error(err); 
-			});
+		.catch(function(err) {
+			console.error(err); 
+		});
 
 		const data = await response.json();
 		return data;

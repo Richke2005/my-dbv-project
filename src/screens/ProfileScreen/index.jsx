@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, View, Text, StyleSheet } from "react-native";
 import TextFild from "../../components/textfild";
 
-const Profile = () => {
+const ProfileScreen = () => {
 	const [newEmail, setEmail] = useState("")
 	console.log(newEmail)
 	return<ScrollView>
@@ -37,4 +37,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Profile;
+export default ProfileScreen;
