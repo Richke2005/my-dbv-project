@@ -87,13 +87,14 @@ export default function HomeScreen() {
 				</Animated.View>
 			</ImageCard>
 
-			<Card style={{ margin: 10 }}>
+			<Card style={{ margin: 10 }}
+			onPress={() => navigation.navigate("NewsScreen")}>
 				<Card.Title
 					title="News"
 					titleStyle={{ fontSize: 20 }}
-					subtitle="subTitle"
-					left={(props) => <Avatar.Icon {...props} icon="heart" />}
-					right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
+					subtitle="Tomorrow we have a special event that you can't miss!"
+					left={(props) => <Avatar.Icon {...props} icon="newspaper" />}
+					right={(props) => <IconButton {...props} icon="chevron-right" onPress={() =>  navigation.navigate("NewsScreen")}/>}
 				/>
 			</Card>
 
