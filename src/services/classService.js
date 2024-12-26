@@ -61,8 +61,9 @@ class ClassService extends Service{
                     'leaderships.email': 1,
                     'leaderships.image': 1
                 }
-            }
-        ]);
+            },
+        ])
+        .then(items => items[0]);
     }
 }
 
