@@ -7,6 +7,7 @@ const leadershipSchema = new Schema({
     },
     function: String,
     email: String,
+    image: String,
     club: {
         _id: {
             type: Schema.Types.ObjectId,

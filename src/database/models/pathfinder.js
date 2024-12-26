@@ -5,7 +5,11 @@ const pathfinderSchema = new Schema({
     type: String,
     required: true,
   },
-  age: Number,
+  last_name: {
+    type: String,
+    required: true,
+  },
+  age: Date,
   rg: String,
   blood_type: String,
   email: {
