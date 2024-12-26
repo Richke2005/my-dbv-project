@@ -103,7 +103,7 @@ export default function HomeScreen() {
 				subtitle={pathfinderData.club.name}
 				img={pathfinderData.class.image}
 				style={{ minHeight: 400 }}
-				onPress={() => navigation.navigate("ClassScreen")}
+				onPress={() => navigation.navigate("ClassScreen", { classId: pathfinderData.class._id })}
 			/>
 
 			<ImageCard

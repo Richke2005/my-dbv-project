@@ -1,11 +1,32 @@
 import React from "react";
-import {View, Image} from "react-native";
-import image from "../../../assets/images/pathfinders_lenço.png";
+import { View } from "react-native";
+import ClassService from "../../infra/services/pathfinders_api/classService.js";
+import { useNavigation } from "@react-navigation/native";
+import ImageCard from "../../patterns/imageCard";
 
 
-const ClassScreen = ()=>{
+const ClassScreen = ({route})=>{
+	const navigation = useNavigation();
+	const { classId } = route.params;
+
+	const [classData, setClassData] = React.useState({});
+
+	React.useEffect(() => fetchClassData(), []);
+
+	function fetchClassData() {
+		new ClassService()
+			.getDataById(classId)
+			.then((data) => setClassData(data))
+			.catch((error) => console.error(error));
+	}
+	
 	return<View>
-		<Image source={image} style={{ height: 200, width: "100%"}}/>
+		<ImageCard
+			img={classData.image}
+			title={classData.name}
+			subtitle={classData.type}
+			style={{ minHeight: 300 }}
+		/>
 	</View>;
 };
 
