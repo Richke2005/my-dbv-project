@@ -6,7 +6,8 @@ const leadershipSchema = new Schema({
         required: true,
     },
     function: String,
-    email: String,
+    email: {type: String, required: true},
+    password: {type: String, required: true},
     image: String,
     club: {
         _id: {
