@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Pressable, Text, Image, StyleSheet } from "react-native";
 
-export default function ImageCard({children, title, subtitle, text, img, style, ...props}) {
+const ImageCard = ({children, title, subtitle, text, img, style, ...props}) => {
     return<Pressable style={[styles.cardContainer, style]} {...props}>
         <Image source={{uri: img}} style={{ 
             position: "absolute", 
@@ -50,3 +50,5 @@ const styles = StyleSheet.create({
         color: "white"
     }
 });
+
+export default ImageCard;

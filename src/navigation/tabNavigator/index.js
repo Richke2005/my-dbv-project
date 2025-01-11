@@ -12,7 +12,7 @@ export default function MyTabs() {
 	  <Tab.Navigator 
 	  	initialRouteName="Home"
 		screenOptions={{headerShown: false}}
-		
+		safeAreaInsets={{top: 0}}
 		tabBar={(props) => <TabBar {...props} />}>
 		<Tab.Screen name="Class" component={ClassStack} />
 		<Tab.Screen name="Home" component={HomeStack} />

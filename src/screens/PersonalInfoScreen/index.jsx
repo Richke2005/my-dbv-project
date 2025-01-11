@@ -1,8 +1,8 @@
 import React from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
-import { useNavigation, StackActions } from "@react-navigation/native";
-import PathfinderService from "../../infra/services/pathfinders_api/pathfinderService";
-import Avatar from "../../components/avatar";
+import { SafeAreaView, ScrollView, View, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { PathfinderService } from "../../infra/services/index.js";
+import Avatar from "../../components/Avatars/circleAvatar/index.jsx";
 import { TextInput, Button } from 'react-native-paper';
 
 export default function PersonalInfoScreen({route}) {
@@ -46,70 +46,70 @@ export default function PersonalInfoScreen({route}) {
             .catch((error) => console.error(error));
     }
     
-  return <ScrollView>
-    <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <Avatar 
-        style={{marginTop: 20}}
-        size={150}
-        borderColor="purple"
-        source={image}/>
-    </View>
+  return <SafeAreaView>
+    <ScrollView>
+        <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Avatar 
+            style={{marginTop: 20}}
+            size={150}
+            borderColor="purple"
+            source={image}/>
+        </View>
 
-    <View style={styles.labelsContainer}>
-        <TextInput
-        style={styles.labels}
-            label="Name"
-            value={labelName}
-            onChangeText={text => setName(text)}
-        />
+        <View style={styles.labelsContainer}>
+            <TextInput
+            style={styles.labels}
+                label="Name"
+                value={labelName}
+                onChangeText={text => setName(text)}
+            />
 
-        <TextInput
-        style={styles.labels}
-            label="Last Name"
-            value={labelLastname}
-            onChangeText={text => setLastName(text)}
-        />
+            <TextInput
+            style={styles.labels}
+                label="Last Name"
+                value={labelLastname}
+                onChangeText={text => setLastName(text)}
+            />
 
-        <TextInput
-        style={styles.labels}
-            label="Email"
-            value={labelEmail}
-            onChangeText={text => setEmail(text)}
-        />
+            <TextInput
+            style={styles.labels}
+                label="Email"
+                value={labelEmail}
+                onChangeText={text => setEmail(text)}
+            />
 
-        <TextInput
-        style={styles.labels}
-            label="Data de Nascimento"
-            value={labelAge}
-            keyboardType="default"
-            onChangeText={text => setAge(text)}
-        />
+            <TextInput
+            style={styles.labels}
+                label="Data de Nascimento"
+                value={labelAge}
+                keyboardType="default"
+                onChangeText={text => setAge(text)}
+            />
 
-        <TextInput
-        style={styles.labels}
-            label="Tipo Sanguíneo"
-            value={labelBloodType}
-            onChangeText={text => setBloodType(text)}
-        />
+            <TextInput
+            style={styles.labels}
+                label="Tipo Sanguíneo"
+                value={labelBloodType}
+                onChangeText={text => setBloodType(text)}
+            />
 
-        <TextInput
-        style={styles.labels}
-            label="RG"
-            value={labelRg}
-            onChangeText={text => setRg(text)}
-        />
+            <TextInput
+            style={styles.labels}
+                label="RG"
+                value={labelRg}
+                onChangeText={text => setRg(text)}
+            />
 
-        <Button 
-        style={{marginTop: 20}}
-        icon="update" 
-        mode="contained" 
-        onPress={() => updateData()}>
-            Atualizar Dados
-        </Button>
-    </View>
-
-   
-  </ScrollView>;
+            <Button 
+            style={{marginTop: 20}}
+            icon="update" 
+            mode="contained" 
+            onPress={() => updateData()}>
+                Atualizar Dados
+            </Button>
+        </View>
+    </ScrollView>
+  </SafeAreaView>;
 }
 
 const styles = StyleSheet.create({

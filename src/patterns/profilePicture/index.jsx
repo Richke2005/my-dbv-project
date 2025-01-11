@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import Avatar from '../../components/avatar/index.jsx';
+import Avatar from '../../components/Avatars/circleAvatar/index.jsx';
 
 const ProfilePicture = ({ size = 10, source= '',  borderColor = '', name, info = [], style}) => {
     return <View style={[{ 

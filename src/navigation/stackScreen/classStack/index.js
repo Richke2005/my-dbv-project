@@ -1,6 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ClassScreen from "../../../screens/ClassScreen/index.jsx";
+import PathfinderScreen from "../../../screens/PathfinderScreen/index.jsx";
 
 const Stack = createNativeStackNavigator();
 

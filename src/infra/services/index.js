@@ -1,9 +1,11 @@
-import ClassBookService from './pathfinders_api/classBookService';
-import PathfinderService from './pathfinders_api/pathfinderService'
-import BibleServices from './digital_bible_api/bible_services';
-import { searchPhoto, curatedPhoto } from './pexels/pexels_services';
+import ClassBookService from './pathfindersApi/classBookService.js';
+import PathfinderService from './pathfindersApi/pathfinderService.js';
+import ClassService from './pathfindersApi/classService.js';
+import BibleServices from './digitalBibleApi/bibleServices.js';
+import { searchPhoto, curatedPhoto } from './pexels/pexels_services.js';
 
 export {
+	ClassService,
 	ClassBookService,
 	PathfinderService,
 	BibleServices,

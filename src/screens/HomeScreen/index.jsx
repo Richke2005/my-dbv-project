@@ -1,8 +1,7 @@
 import React from "react";
-import { ScrollView, StyleSheet, Animated, Easing } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Animated, Easing } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import BibleServices from "../../infra/services/digital_bible_api/bible_services";
-import PathfinderService from "../../infra/services/pathfinders_api/pathfinderService";
+import { PathfinderService } from "../../infra/services/index.js";
 import ImageCard from "../../patterns/imageCard";
 import { ActivityIndicator, MD2Colors, Card, Avatar, IconButton, Button } from "react-native-paper";
 
@@ -56,7 +55,8 @@ export default function HomeScreen() {
 	if (Object.keys(pathfinderData).length === 0)
 		return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
 
-	return <ScrollView>
+	return <SafeAreaView>
+		<ScrollView>
 			<ImageCard
 				title="Proverbs 3:5-6"
 				text="Trust in the Lord with all your heart
@@ -111,9 +111,10 @@ export default function HomeScreen() {
 				subtitle={pathfinderData.club.name}
 				img={pathfinderData.unit.image}
 				style={{ minHeight: 400 }}
-				onPress={() => navigation.navigate("UnitScreen")}
+				onPress={() => navigation.navigate("UnitScreen", { classId: pathfinderData.class._id })}
 			/>
-		</ScrollView>;
+			</ScrollView>
+	</SafeAreaView>;
 }
 
 const styles = StyleSheet.create({
