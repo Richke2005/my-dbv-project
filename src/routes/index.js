@@ -1,4 +1,6 @@
 const express = require("express");
+const authRoutes = require("./authRoutes.js");
+const authenticate = require("../middlewares/authenticate.js");
 const bookResponseRoutes = require("./bookResponseRoutes.js");
 const classRoutes = require("./classRoutes.js");
 const classBookRoutes = require("./classBookRoutes.js");
@@ -16,6 +18,8 @@ module.exports = (app) => {
 
     app.use(
         express.json(),
+        authRoutes,
+        authenticate,
         bookResponseRoutes,
         classRoutes,
         classBookRoutes,

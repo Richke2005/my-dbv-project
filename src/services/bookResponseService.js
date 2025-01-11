@@ -6,7 +6,7 @@ class BookResponseService extends Services{
     }
 
     async searchResponsesByClassBook(classBookId){
-        return await this.find({'class_book._id': classBookId});
+        return await this.getRegBySearch({'class_book._id': classBookId});
     }
 }
 

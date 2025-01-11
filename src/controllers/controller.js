@@ -28,7 +28,7 @@ class Controller{
             const savedDocument = await this.entityService.postReg(doc);
             res.status(201).send({createdDoc: savedDocument});
         }catch(error){
-            return res.status(500).send({message: error});
+            return res.status(400).send({message: error.message});
         }
     }
 
