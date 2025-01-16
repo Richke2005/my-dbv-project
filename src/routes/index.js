@@ -5,8 +5,8 @@ const bookResponseRoutes = require("./bookResponseRoutes.js");
 const classRoutes = require("./classRoutes.js");
 const classBookRoutes = require("./classBookRoutes.js");
 const clubRoutes = require("./clubRoutes.js");
-const leadershipRoutes = require("./leadershipRoutes.js");
-const pathfinderRoutes = require("./pathfinderRoutes.js");
+const userRoutes = require("./userRoutes.js");
+const profileRoutes = require("./profileRoutes.js");
 const postRoutes = require("./postRoutes.js");
 const unitRoutes = require("./unitRoutes.js");
 
@@ -24,8 +24,8 @@ module.exports = (app) => {
         classRoutes,
         classBookRoutes,
         clubRoutes,
-        leadershipRoutes,
-        pathfinderRoutes,
+        userRoutes,
+        profileRoutes,
         postRoutes,
         unitRoutes
     );

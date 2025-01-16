@@ -15,10 +15,10 @@ class ClassService extends Service{
             },
             {
                 $lookup: {
-                    from: "pathfinders",
+                    from: "users",
                     localField: "_id",
                     foreignField: "class._id",
-                    as: "pathfinders"
+                    as: "users"
                 }
             },
             {
@@ -28,38 +28,13 @@ class ClassService extends Service{
                     image: 1,
                     type: 1,
                     club: 1,
-                    'pathfinders._id': 1,
-                    'pathfinders.name': 1,
-                    'pathfinders.email': 1,
-                    'pathfinders.unit': 1,
-                    'pathfinders.image': 1
-                }
-            },
-            {
-                $lookup: {
-                    from: "leaderships",
-                    localField: "_id",
-                    foreignField: "led_class._id",
-                    as: "leaderships"
-                }
-            },
-            {
-                $project: {
-                    _id: 1,
-                    name: 1,
-                    image: 1,
-                    type: 1,
-                    club: 1,
-                    'pathfinders._id': 1,
-                    'pathfinders.name': 1,
-                    'pathfinders.email': 1,
-                    'pathfinders.unit': 1,
-                    'pathfinders.image': 1,
-                    'leaderships._id': 1,
-                    'leaderships.name': 1,
-                    'leaderships.function': 1,
-                    'leaderships.email': 1,
-                    'leaderships.image': 1
+                    'users._id': 1,
+                    'users.classification': 1,
+                    'users.name': 1,
+                    'users.email': 1,
+                    'users.unit': 1,
+                    'users.image': 1,
+                    'users.function': 1
                 }
             },
         ])

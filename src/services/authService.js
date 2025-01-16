@@ -1,35 +1,30 @@
-const Service = require('./services.js');
 const DataSource = require('../database/models/index.js');
 const {compare} = require('bcryptjs');
 const {sign} = require('jsonwebtoken');
 require("dotenv").config();
 
 class AuthService{
-    #leadership;
-    #pathfinder;
+    #user
     constructor(){
-        this.#leadership = DataSource.models['leaderships'];
-        this.#pathfinder = DataSource.models['pathfinders'];
+        this.#user = DataSource.models['users'];
     }
 
     async login(doc){
-        const pathfinder = await this.#pathfinder.findOne({email: doc.email});
-        const leadership = await this.#leadership.findOne({email: doc.email});
+        const user = await this.#user.findOne({email: doc.email});
 
-        if(!pathfinder && !leadership){
+        if(!user){
             throw new Error('User not found');
         }
         
-        const validUser = pathfinder || leadership;
-        const isPasswordValid = await compare(doc.password, validUser.password);
+        const isPasswordValid = await compare(doc.password, user.password);
 
         if(!isPasswordValid){
             throw new Error('Invalid user or password');
         }
 
         const accessToken = sign({
-            id: validUser.id,
-            email: validUser.email
+            id: user.id,
+            email: user.email
         }, process.env.SECRET_KEY, {
             expiresIn: 86400
         })

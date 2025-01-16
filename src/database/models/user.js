@@ -1,6 +1,20 @@
 const {Schema} = require('mongoose');
 
-const pathfinderSchema = new Schema({
+const userSchema = new Schema({
+  image: String,
+  age: Date,
+  rg: String,
+  blood_type: String,
+  function: [String],
+  talents: Number,
+  classification: {
+    type: String,
+    required: [true, "The classification is required"],
+    enum: {
+      values: ["pathfinder", "leadership"],
+      message:  "The classification '{VALUE}' is not a valid value"
+    }
+  },
   name: {
     type: String,
     required: true,
@@ -9,9 +23,6 @@ const pathfinderSchema = new Schema({
     type: String,
     required: true,
   },
-  age: Date,
-  rg: String,
-  blood_type: String,
   email: {
     type: String,
     required: true,
@@ -51,11 +62,10 @@ const pathfinderSchema = new Schema({
     },
     name: String,
     image: String
-  },
-  talents: Number
+  }
 },
 {
   timestamps: true,
 });
 
-module.exports = pathfinderSchema;
+module.exports = userSchema;

@@ -1,15 +1,14 @@
 const Services = require("./services.js");
 const {hash} = require("bcryptjs");
 
-class LeadershipService extends Services{
+class UserService extends Services{
     constructor(){
-        super("leaderships");
+        super("users");
     }
 
-
     async postReg(doc){
-        const leaderships = await this.getRegBySearch({email: doc.email})
-        if(leaderships.length > 0){
+        const users = await this.getRegBySearch({email: doc.email})
+        if(users.length > 0){
             throw new Error("Email already registered");
         }
 
@@ -22,4 +21,4 @@ class LeadershipService extends Services{
     }
 }
 
-module.exports = LeadershipService;
+module.exports = UserService;
