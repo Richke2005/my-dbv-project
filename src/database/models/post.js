@@ -7,20 +7,24 @@ const postSchema = new Schema({
     },
     desc: String,
     image: String,
-    posted_by: {
-        club: {
+    posted_by: [
+        {
             type: Schema.Types.ObjectId,
             ref: 'clubs',
         },
-        unit: {
+        {
             type: Schema.Types.ObjectId,
             ref: 'units',
         },
-        class: {
+        {
             type: Schema.Types.ObjectId,
             ref: 'classes',
+        },
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'users',
         }
-    }
+    ]
 }, {
     timestamps: true
 });
