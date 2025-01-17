@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, SafeAreaView } from 'react-native';
-import { PathfinderService } from '../../infra/services/index.js';
+import { ProfileService } from '../../infra/services/index.js';
 import { useNavigation } from '@react-navigation/native';
 import ProfilePicture from '../../patterns/profilePicture/index.jsx';
 import { ActivityIndicator, MD2Colors, Card, Avatar, IconButton } from "react-native-paper";
@@ -10,16 +10,16 @@ export default function ProfileScreen({route}) {
 	const [info, setInfo] = React.useState({});
 
     React.useEffect(() =>{ 
-		if(route.params?.pathfinderInfo)
-			setInfo(route.params?.pathfinderInfo);
+		if(route.params?.userInfo)
+			setInfo(route.params?.userInfo);
 		else
-			fetchPathfinderData()
+			fetchUserData()
 
-	}, [route.params?.pathfinderInfo]);
+	}, [route.params?.userInfo]);
 
-    function fetchPathfinderData() {
-        new PathfinderService()
-            .getDataById("6750f5f8a03995fe58ea69a2")
+    function fetchUserData() {
+        new ProfileService()
+            .getProfile()
             .then((data) => setInfo(data))
             .catch((error) => console.error(error));
     }
@@ -46,19 +46,19 @@ export default function ProfileScreen({route}) {
 			<Card.Title
 			title="Edit Profile"
 			left={(props) => <Avatar.Icon {...props} icon="account" />}
-			right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => navigation.navigate("PersonalInfoScreen", {pathfinderInfo: info})} />}
+			right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => navigation.navigate("PersonalInfoScreen", {userInfo: info})} />}
 			/>
 
 			<Card.Title
 			title="Settings"
 			left={(props) => <Avatar.Icon {...props} icon="cog" />}
-			right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => navigation.navigate("PersonalInfoScreen", {pathfinderInfo: info})} />}
+			right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => navigation.navigate("PersonalInfoScreen", {userInfo: info})} />}
 			/>
 
 			<Card.Title
 			title="Shoppings"
 			left={(props) => <Avatar.Icon {...props} icon="shopping" />}
-			right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => navigation.navigate("PersonalInfoScreen", {pathfinderInfo: info})} />}
+			right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => navigation.navigate("PersonalInfoScreen", {userInfo: info})} />}
 			/>
 
 			<Card.Title

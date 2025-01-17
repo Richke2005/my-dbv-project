@@ -1,13 +1,17 @@
 import ClassBookService from './pathfindersApi/classBookService.js';
-import PathfinderService from './pathfindersApi/pathfinderService.js';
+import UserService from './pathfindersApi/userService.js';
+import ProfileService from './pathfindersApi/profileService.js';
 import ClassService from './pathfindersApi/classService.js';
+import AuthService from './pathfindersApi/authService.js';
 import BibleServices from './digitalBibleApi/bibleServices.js';
 import { searchPhoto, curatedPhoto } from './pexels/pexels_services.js';
 
-export {
+export{
 	ClassService,
 	ClassBookService,
-	PathfinderService,
+	UserService,
+	ProfileService,
+	AuthService,
 	BibleServices,
 	searchPhoto,
 	curatedPhoto

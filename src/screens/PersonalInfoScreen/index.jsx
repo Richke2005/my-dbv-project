@@ -1,13 +1,13 @@
 import React from "react";
 import { SafeAreaView, ScrollView, View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { PathfinderService } from "../../infra/services/index.js";
+import { ProfileService } from "../../infra/services/index.js";
 import Avatar from "../../components/Avatars/circleAvatar/index.jsx";
 import { TextInput, Button } from 'react-native-paper';
 
 export default function PersonalInfoScreen({route}) {
     const navigation = useNavigation();
-    const {_id, name, last_name, email, age, blood_type, rg, image } = route.params?.pathfinderInfo;
+    const {_id, name, last_name, email, age, blood_type, rg, image } = route.params?.userInfo;
 
     const [labelName, setName] = React.useState(name);
     const [labelLastname, setLastName] = React.useState(last_name);
@@ -35,13 +35,13 @@ export default function PersonalInfoScreen({route}) {
             image: image
         }
 
-        new PathfinderService()
-            .putData(_id, updatedUser)
+        new ProfileService()
+            .updateProfile(updatedUser)
             .then(() => {
                 alert('atualizado com sucesso!');
 
                 navigation.popTo('ProfileScreen', { 
-                    pathfinderInfo: updatedUser})
+                    userInfo: updatedUser})
             })
             .catch((error) => console.error(error));
     }

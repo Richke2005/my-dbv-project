@@ -1,9 +1,19 @@
-class Service {
+import AsycnStorage from '@react-native-async-storage/async-storage';
+
+export default class Service {
     #entity;
     url
     constructor(entity) {
         this.#entity = entity;
-        this.url = `http://192.168.0.26:8000/dbv/api/v1/${this.#entity}`;
+        this.url = `http://192.168.0.25:8000/dbv/api/v1/${this.#entity}`;
+    }
+
+    async getToken(){
+        try{
+            return await AsycnStorage.getItem('token');
+        }catch(e){
+            console.log(e);
+        }
     }
 
     /**
@@ -14,7 +24,8 @@ class Service {
         const response = await fetch(this.url, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${await this.getToken()}`
             },
             mode: 'cors'
         });
@@ -31,6 +42,7 @@ class Service {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${await this.getToken()}`
             },
             mode: 'cors'
         });
@@ -47,6 +59,7 @@ class Service {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${await AsycnStorage.getItem('token')}`
             },
             mode: 'cors',
             body: JSON.stringify(data)
@@ -65,6 +78,7 @@ class Service {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${await this.getToken()}`
             },
             mode: 'cors',
             body: JSON.stringify(data)
@@ -82,6 +96,7 @@ class Service {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${await this.getToken()}`
             },
             mode: 'cors'
         });
@@ -89,5 +104,3 @@ class Service {
     }
 
 }
-
-module.exports = Service;

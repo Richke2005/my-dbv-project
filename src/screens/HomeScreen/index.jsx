@@ -1,12 +1,13 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Animated, Easing } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { PathfinderService } from "../../infra/services/index.js";
+import { ProfileService } from "../../infra/services/index.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import ImageCard from "../../patterns/imageCard";
 import { ActivityIndicator, MD2Colors, Card, Avatar, IconButton, Button } from "react-native-paper";
 
 export default function HomeScreen() {
-	const [pathfinderData, setPathfinderData] = React.useState({});
+	const [userData, setUserData] = React.useState({});
 	const [checkButton, setCheckButton] = React.useState(false);
 	const navigation = useNavigation();
 	const scaleValue = React.useRef(new Animated.Value(1)).current;
@@ -16,10 +17,12 @@ export default function HomeScreen() {
 	}, []);
 
 	function fetchPathfinderData() {
-		new PathfinderService()
-			.getDataById("6750f5f8a03995fe58ea69a2")
-			.then((data) => setPathfinderData(data))
-			.catch((error) => console.error(error));
+		new ProfileService()
+		.getProfile()	
+		.then((data) => {
+			setUserData(data);
+		})
+		.catch((error) => console.error(error));
 	}
 
 	function animateButton() {
@@ -42,7 +45,7 @@ export default function HomeScreen() {
 	function completeReading() {
 		if (!checkButton) {
 			setCheckButton(true);
-			const currentTalents = pathfinderData.talents;
+			const currentTalents = userData.talents;
 			new PathfinderService()
 				.putData("6750f5f8a03995fe58ea69a2", { talents: currentTalents + 10 })
 				.then(() => {
@@ -52,7 +55,7 @@ export default function HomeScreen() {
 		}
 	}
 
-	if (Object.keys(pathfinderData).length === 0)
+	if (Object.keys(userData).length === 0)
 		return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
 
 	return <SafeAreaView>
@@ -99,19 +102,19 @@ export default function HomeScreen() {
 			</Card>
 
 			<ImageCard
-				title={pathfinderData.class.name}
-				subtitle={pathfinderData.club.name}
-				img={pathfinderData.class.image}
+				title={userData.class.name}
+				subtitle={userData.club.name}
+				img={userData.class.image}
 				style={{ minHeight: 400 }}
-				onPress={() => navigation.navigate("ClassScreen", { classId: pathfinderData.class._id })}
+				onPress={() => navigation.navigate("ClassScreen", { classId: userData.class._id })}
 			/>
 
 			<ImageCard
-				title={pathfinderData.unit.name}
-				subtitle={pathfinderData.club.name}
-				img={pathfinderData.unit.image}
+				title={userData.unit.name}
+				subtitle={userData.club.name}
+				img={userData.unit.image}
 				style={{ minHeight: 400 }}
-				onPress={() => navigation.navigate("UnitScreen", { classId: pathfinderData.class._id })}
+				onPress={() => navigation.navigate("UnitScreen", { classId: userData.class._id })}
 			/>
 			</ScrollView>
 	</SafeAreaView>;

@@ -1,4 +1,4 @@
-const Service = require('./Service.js');
+import Service from './service.js';
 
 class ClassBookService extends Service{
     constructor(){
@@ -6,4 +6,4 @@ class ClassBookService extends Service{
     }
 }
 
-module.exports = ClassBookService;
+export default ClassBookService;
