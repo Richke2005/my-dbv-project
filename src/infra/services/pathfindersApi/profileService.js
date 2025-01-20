@@ -6,20 +6,12 @@ class ProfileService extends Service{
         super('profile');
     }
 
-    async getToken(){
-        try{
-            return await AsyncStorage.getItem('token');
-        }catch(e){
-            console.log(e);
-        }
-    }
-
     async getProfile() {
         const response = await fetch(`${this.url}/home`, {
             method: 'GET',
             headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${await this.getToken()}`
+            'Authorization': `Bearer ${await super.getToken()}`
             },
             mode: 'cors'
         });
@@ -32,7 +24,7 @@ class ProfileService extends Service{
             method: 'PUT',
             headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${await this.getToken()}`
+            'Authorization': `Bearer ${await super.getToken()}`
             },
             mode: 'cors',
             body: JSON.stringify(data)

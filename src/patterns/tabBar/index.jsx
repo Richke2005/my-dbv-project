@@ -4,8 +4,9 @@ import { useTheme } from "@react-navigation/native";
 
 export default function TabBar({ state, descriptors, navigation }) {
 	const { colors } = useTheme();
-  
+	
 	return (
+
 	  <View style={[styles.tabBarContainer, { backgroundColor: colors.background }]}>
 		{state.routes.map((route, index) => {
 		  const { options } = descriptors[route.key];
@@ -17,7 +18,7 @@ export default function TabBar({ state, descriptors, navigation }) {
 			  : route.name;
   
 		  const isFocused = state.index === index;
-  
+
 		  const onPress = () => {
 			const event = navigation.emit({
 			  type: 'tabPress',
@@ -36,7 +37,7 @@ export default function TabBar({ state, descriptors, navigation }) {
 			  target: route.key,
 			});
 		  };
-  
+		
 		  return (
 			<Pressable
 			  key={index}

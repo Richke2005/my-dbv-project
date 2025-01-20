@@ -7,16 +7,22 @@ import BottomSheet, { BottomSheetView, BottomSheetScrollView } from '@gorhom/bot
 import ImageCard from "../../patterns/imageCard";
 import { PressedAvatarGroup, SpacedAvatarGroup } from "../../patterns/avatarGroup/index.js";
 
-const ClassScreen = ({route}) => {
-	const navigation = useNavigation();
+const ClassScreen = ({route, navigation}) => {
 	const { classId } = route.params;
 	const bottomSheetRef = useRef(null);
 	const snapPoints = useMemo(() => ["25%", "50%", "90%"], []);
 
-	const [classData, setClassData] = React.useState([]);
+	const [classData, setClassData] = React.useState({});
+	
+	const {users} = classData;
 
-	const pathfinders = classData.pathfinders;
-	const leaderships = classData.leaderships;
+	console.log(users);
+	
+	// const leaderships = users.map((leadership) =>{
+	// 	if(leadership.classification === "leadership"){
+	// 		return leadership;
+	// 	}
+	// });
 
 	const handleExpandAction = () => bottomSheetRef.current?.expand();
 	const handleCloseAction = () => bottomSheetRef.current?.close();
@@ -36,7 +42,7 @@ const ClassScreen = ({route}) => {
 		return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
 	
 	return<SafeAreaView style={{position: "relative", flex: 1}}>
-		<ScrollView showsVerticalScrollIndicator={false}>
+		{/* <ScrollView showsVerticalScrollIndicator={false}>
 			<Pressable
 				style={{
 					alignSelf: "flex-end",
@@ -108,13 +114,13 @@ const ClassScreen = ({route}) => {
 						<Card.Title
 							key={leadership._id}
 							title={leadership.name}
-							subtitle={leadership.role}
+							subtitle={leadership.function}
 							left={(props) => <Avatar.Image {...props} source={{uri: leadership.image}} />}
 							right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => {}} />}
 						/>
 					))}
 			</BottomSheetScrollView>
-		</BottomSheet>
+		</BottomSheet> */}
 	</SafeAreaView>;
 };
 

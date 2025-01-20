@@ -36,7 +36,6 @@ export default function NewsScreen() {
             title="Close"
             onPress={handleCloseAction}/>
               
-          
         </BottomSheetView>
       </BottomSheet>
   </View>;

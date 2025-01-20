@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { AuthService } from "../../infra/services/index"
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { View, Text, KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import { TextInput, Button } from 'react-native-paper';
 
-const LoginBox = ({title, navigateTo}) => {
+const LoginBox = ({title, onLogin}) => {
     const [labelEmail, setEmail] = useState("");
     const [labelPassword, setPassword] = useState("");
-    const navigation = useNavigation();
     const authService = new AuthService();
+
+    const handleLogin = async () => {
+        if(!isEmptyCamps()){
+            const response = await authService.login({email: labelEmail, password: labelPassword});
+            if(response.status === 200){
+                const data = await response.json();
+                onLogin(data.accessToken);
+            }else{
+                alert("Usuário ou senha inválidos");
+            }
+        }
+    }
 
     function isEmptyCamps(){
         if(labelEmail === "" || labelPassword === ""){
@@ -48,22 +58,9 @@ const LoginBox = ({title, navigateTo}) => {
                     style={{marginTop: 20}}
                     icon="login" 
                     mode="contained" 
-                    onPress={async () => {
-                        if(!isEmptyCamps()){
-                            const response = await authService.login({email: labelEmail, password: labelPassword});
-                            if(response.status === 200){
-                                const data = await response.json();
-                                try {
-                                    await AsyncStorage.setItem('token', data.accessToken);
-                                    navigation.navigate(navigateTo);
-                                }catch(e){
-                                    console.log(e);
-                                }
-                            }else{
-                                alert("Usuário ou senha inválidos");
-                            }
-                        }
-                    }}>Login</Button>
+                    onPress={async () => await handleLogin()}>
+                        Login
+                </Button>
             </View>
         </View>
     </KeyboardAvoidingView> 

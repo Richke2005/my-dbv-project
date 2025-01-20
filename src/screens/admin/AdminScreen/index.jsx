@@ -1,28 +1,33 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Animated, Easing } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { ProfileService } from "../../infra/services/index.js";
+import { ProfileService } from "../../../infra/services/index.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ImageCard from "../../patterns/imageCard";
+import ImageCard from "../../../patterns/imageCard/index.jsx";
 import { ActivityIndicator, MD2Colors, Card, Avatar, IconButton, Button } from "react-native-paper";
 
-export default function HomeScreen() {
+export default function AdminScreen({route}) {
 	const [userData, setUserData] = React.useState({});
 	const [checkButton, setCheckButton] = React.useState(false);
 	const navigation = useNavigation();
 	const scaleValue = React.useRef(new Animated.Value(1)).current;
 
 	React.useEffect(() => {
-		fetchPathfinderData();
+		fetchUserData();
 	}, []);
 
-	function fetchPathfinderData() {
-		new ProfileService()
-		.getProfile()	
-		.then((data) => {
-			setUserData(data);
-		})
-		.catch((error) => console.error(error));
+	function fetchUserData() {
+		const user = route.params?.userInfo;
+		if (user)
+			setUserData(user);
+		else{
+			new ProfileService()
+			.getProfile()	
+			.then((data) => {
+				setUserData(data);
+			})
+			.catch((error) => console.error(error));
+		}
 	}
 
 	function animateButton() {
@@ -46,10 +51,9 @@ export default function HomeScreen() {
 		if (!checkButton) {
 			setCheckButton(true);
 			const currentTalents = userData.talents;
-			new PathfinderService()
-				.putData("6750f5f8a03995fe58ea69a2", { talents: currentTalents + 10 })
+			new ProfileService().updateProfile({ talents: currentTalents + 10 })
 				.then(() => {
-					fetchPathfinderData();
+					fetchUserData();
 					animateButton();
 				});
 		}
@@ -57,6 +61,12 @@ export default function HomeScreen() {
 
 	if (Object.keys(userData).length === 0)
 		return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
+
+	if (!userData.class)
+		userData.class = { name: "You haven't a class yet", image: "https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-fall-nature-scenery-free-image.jpeg?w=600&quality=80" };
+
+	if (!userData.unit)
+		userData.unit = { name: "You haven't a unit yet", image: "https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-fall-nature-scenery-free-image.jpeg?w=600&quality=80" };
 
 	return <SafeAreaView>
 		<ScrollView>
@@ -100,13 +110,18 @@ export default function HomeScreen() {
 					right={(props) => <IconButton {...props} icon="chevron-right" onPress={() =>  navigation.navigate("NewsScreen")}/>}
 				/>
 			</Card>
-
+			
 			<ImageCard
 				title={userData.class.name}
 				subtitle={userData.club.name}
 				img={userData.class.image}
 				style={{ minHeight: 400 }}
-				onPress={() => navigation.navigate("ClassScreen", { classId: userData.class._id })}
+				onPress={() => {
+					if(!userData.class._id)
+						alert("You haven't a class yet");
+					else
+						navigation.navigate("ClassScreen", { classId: userData.class._id })
+			}}
 			/>
 
 			<ImageCard
@@ -114,7 +129,12 @@ export default function HomeScreen() {
 				subtitle={userData.club.name}
 				img={userData.unit.image}
 				style={{ minHeight: 400 }}
-				onPress={() => navigation.navigate("UnitScreen", { classId: userData.class._id })}
+				onPress={() => {
+					if(!userData.unit._id)
+						alert("You haven't a unit yet");
+					else
+						navigation.navigate("ClassScreen", { classId: userData.unit._id })
+				}}
 			/>
 			</ScrollView>
 	</SafeAreaView>;

@@ -9,10 +9,12 @@ class ClassService extends Service{
         const response = await fetch(`${this.url}/${id}/pathfinders`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${await super.getToken()}`
             },
             mode: 'cors'
         });
+
         return response.json();
     }
 }

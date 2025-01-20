@@ -1,12 +1,10 @@
 import React from "react";
 import { SafeAreaView, ScrollView, View, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { ProfileService } from "../../infra/services/index.js";
 import Avatar from "../../components/Avatars/circleAvatar/index.jsx";
 import { TextInput, Button } from 'react-native-paper';
 
-export default function PersonalInfoScreen({route}) {
-    const navigation = useNavigation();
+export default function PersonalInfoScreen({route, navigation}) {
     const {_id, name, last_name, email, age, blood_type, rg, image } = route.params?.userInfo;
 
     const [labelName, setName] = React.useState(name);

@@ -5,11 +5,18 @@ import PersonalInfoScreen from "../../../screens/PersonalInfoScreen/index.jsx";
 
 const Stack = createNativeStackNavigator();
 
-export default function ProfileStack() {
+export default function ProfileStack({logout}) {
+
+    const executeApp = () => {
+        logout()
+    }
+
     return (
         <Stack.Navigator initialRouteName="ProfileScreen" 
         screenOptions={{headerShown: true}}>
-            <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{title: "Profile"}}/>
+            <Stack.Screen name="ProfileScreen" options={{headerShown: false}}>
+                {(props) => <ProfileScreen {...props} onLogout={executeApp}/>}
+            </Stack.Screen>
             <Stack.Screen name="PersonalInfoScreen" component={PersonalInfoScreen} options={{title: "Informations"}}/>
         </Stack.Navigator>
     );
