@@ -1,94 +1,49 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet, Platform } from 'react-native';
-import { useTheme } from "@react-navigation/native";
+import { CommonActions } from '@react-navigation/native';
+import { BottomNavigation } from 'react-native-paper';
 
-export default function TabBar({ state, descriptors, navigation }) {
-	const { colors } = useTheme();
-	
-	return (
+export default function TabBar({ navigation, state, descriptors, insets }) {
+  return (
+    <BottomNavigation.Bar
+      navigationState={state}
+      safeAreaInsets={insets}
+      onTabPress={({ route, preventDefault }) => {
+        const event = navigation.emit({
+          type: 'tabPress',
+          target: route.key,
+          canPreventDefault: true,
+        });
 
-	  <View style={[styles.tabBarContainer, { backgroundColor: colors.background }]}>
-		{state.routes.map((route, index) => {
-		  const { options } = descriptors[route.key];
-		  const label =
-			options.tabBarLabel !== undefined
-			  ? options.tabBarLabel
-			  : options.title !== undefined
-			  ? options.title
-			  : route.name;
-  
-		  const isFocused = state.index === index;
+        if (event.defaultPrevented) {
+          preventDefault();
+        } else {
+          navigation.dispatch({
+            ...CommonActions.navigate(route.name, route.params),
+            target: state.key,
+          });
+        }
+      }}
+      renderIcon={({ route, focused, color }) => {
+        const { options } = descriptors[route.key];
+        if (options.tabBarIcon) {
+          return options.tabBarIcon({ focused, color, size: 24 });
+        }
 
-		  const onPress = () => {
-			const event = navigation.emit({
-			  type: 'tabPress',
-			  target: route.key,
-			  canPreventDefault: true,
-			});
-  
-			if (!isFocused && !event.defaultPrevented) {
-			  navigation.navigate(route.name);
-			}
-		  };
-  
-		  const onLongPress = () => {
-			navigation.emit({
-			  type: 'tabLongPress',
-			  target: route.key,
-			});
-		  };
-		
-		  return (
-			<Pressable
-			  key={index}
-			  accessibilityState={isFocused ? { selected: true } : {}}
-			  accessibilityLabel={options.tabBarAccessibilityLabel}
-			  testID={options.tabBarButtonTestID}
-			  onPress={onPress}
-			  onLongPress={onLongPress}
-			  style={[
-				styles.tabItem, 
-				isFocused && styles.tabItemFocused, 
-				{ flex: 1, alignItems: 'center', padding: 10 }
-				]}>
-			  <Text style={[styles.tabText, { color: isFocused ? colors.primary : colors.text }]}>
-				{label}
-			  </Text>
-			</Pressable>
-		  );
-		})}
-	  </View>
-	);
+        return null;
+      }}
+      getLabelText={({ route }) => {
+        const { options } = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.title;
+
+        return label;
+      }}
+      // Definir as props específicas manualmente sem usar spread
+      {...(insets && { safeAreaInsets: insets })}
+    />
+  );
 }
-
-const styles = StyleSheet.create({
-	tabBarContainer: {
-	  flexDirection: "row",
-	  borderTopWidth: 1,
-	  borderTopColor: "#ccc",
-	  paddingVertical: 15,
-	  paddingHorizontal: 5,
-	  shadowColor: "#000",
-	  shadowOpacity: 0.1,
-	  shadowOffset: { width: 0, height: -2 },
-	  shadowRadius: 3,
-	  elevation: 5, // For Android shadow
-	},
-	tabItem: {
-	  flex: 1,
-	  alignItems: "center",
-	  justifyContent: "center",
-	  paddingVertical: 8,
-	  borderWidth: 2,
-	  borderRadius: 10,
-	  marginHorizontal: 5,
-	  borderColor: "transparent",
-	},
-	tabItemFocused: {
-	  backgroundColor: "#f0f0f0",
-	},
-	tabText: {
-	  fontSize: 14,
-	  fontWeight: "bold",
-	},
-  });

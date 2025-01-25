@@ -14,10 +14,10 @@ export default function ProfileStack({logout}) {
     return (
         <Stack.Navigator initialRouteName="ProfileScreen" 
         screenOptions={{headerShown: true}}>
-            <Stack.Screen name="ProfileScreen" options={{headerShown: false}}>
+            <Stack.Screen name="ProfileScreen" options={{title: "Perfil"}}>
                 {(props) => <ProfileScreen {...props} onLogout={executeApp}/>}
             </Stack.Screen>
-            <Stack.Screen name="PersonalInfoScreen" component={PersonalInfoScreen} options={{title: "Informations"}}/>
+            <Stack.Screen name="PersonalInfoScreen" component={PersonalInfoScreen} options={{title: "Informações"}}/>
         </Stack.Navigator>
     );
 }

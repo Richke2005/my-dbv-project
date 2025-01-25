@@ -1,39 +1,45 @@
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useEffect, useState } from "react";
 import { SafeAreaView, Pressable, ScrollView } from "react-native";
 import { ClassService }from "../../infra/services/index.js";
-import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator, Avatar, Card, IconButton, MD2Colors} from "react-native-paper"
 import BottomSheet, { BottomSheetView, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import ImageCard from "../../patterns/imageCard";
 import { PressedAvatarGroup, SpacedAvatarGroup } from "../../patterns/avatarGroup/index.js";
 
-const ClassScreen = ({route, navigation}) => {
-	const { classId } = route.params;
+export default function ClassScreen({route, navigation}){
+	const { classId } = route?.params;
+	const [classData, setClassData] = useState({});
+	const [users, setUsers] = useState([]);
 	const bottomSheetRef = useRef(null);
 	const snapPoints = useMemo(() => ["25%", "50%", "90%"], []);
 
-	const [classData, setClassData] = React.useState({});
+	const pathfinders = [];
+	const leaderships = [];
 	
-	const {users} = classData;
-
-	console.log(users);
-	
-	// const leaderships = users.map((leadership) =>{
-	// 	if(leadership.classification === "leadership"){
-	// 		return leadership;
-	// 	}
-	// });
+	users.forEach((user) => {
+		if(user.classification === "pathfinder"){
+			pathfinders.push(user);
+		}
+		if(user.classification === "leadership"){
+			leaderships.push(user);
+		}
+	});
 
 	const handleExpandAction = () => bottomSheetRef.current?.expand();
 	const handleCloseAction = () => bottomSheetRef.current?.close();
 
 
-	React.useEffect(() => fetchClassData(), []);
+	useEffect(() => {
+		fetchClassData();
+	}, []);
 
 	function fetchClassData() {
 		new ClassService()
 			.getPathfindersByClassId(classId)
-			.then((data) => setClassData(data))
+			.then((data) => {
+				setClassData(data);
+				setUsers(data.users);
+			})
 			.catch((error) => console.error(error));
 	}
 		
@@ -42,7 +48,7 @@ const ClassScreen = ({route, navigation}) => {
 		return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
 	
 	return<SafeAreaView style={{position: "relative", flex: 1}}>
-		{/* <ScrollView showsVerticalScrollIndicator={false}>
+		<ScrollView showsVerticalScrollIndicator={false}>
 			<Pressable
 				style={{
 					alignSelf: "flex-end",
@@ -120,8 +126,6 @@ const ClassScreen = ({route, navigation}) => {
 						/>
 					))}
 			</BottomSheetScrollView>
-		</BottomSheet> */}
+		</BottomSheet>
 	</SafeAreaView>;
 };
-
-export default ClassScreen;

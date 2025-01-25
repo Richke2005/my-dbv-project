@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import TabBar from "../patterns/tabBar/index.jsx";
+import SocialClubStack from "./appStacks/socialClubStack/index.js";
+import ClassBookStack from "./appStacks/classBookStack/index.js";
 import HomeStack from "./appStacks/homeStack/index.js";
-import ClassStack from "./appStacks/classStack/index.js";
 import ProfileStack from "./appStacks/profileStack/index.js";
 import LoginScreen from "../screens/LoginScreen/index.jsx";
 import RegisterScreen from "../screens/RegisterScreen/index.jsx";
@@ -69,12 +71,41 @@ export default function RootNavigator() {
         screenOptions={{headerShown: false, tabBarStyle: { display: 'none' }}}
         safeAreaInsets={{top: 0}}
         tabBar={(props) => <TabBar {...props}/>}>
-        <Tab.Screen name="Class" component={ClassStack} />
-        <Tab.Screen name="Home" component={HomeStack} />
-        
-        <Tab.Screen name="Profile">
-          {(props) => <ProfileStack {...props} logout={logout}/>}
-        </Tab.Screen>
+          <Tab.Screen 
+            name="SocialArea" 
+            component={SocialClubStack} 
+            options={{
+            tabBarLabel: 'Discover',
+            tabBarIcon: ({ color, size }) => {
+              return <Icon name="rocket" size={size} color={color} />;
+            }}}/>
+          <Tab.Screen 
+            name="Books" 
+            component={ClassBookStack} 
+            options={{
+              tabBarLabel: 'Books',
+              tabBarIcon: ({ color, size }) => {
+                return <Icon name="book" size={size} color={color} />;
+              }}}/>
+          <Tab.Screen 
+            name="Home" 
+            component={HomeStack} 
+            options={{
+              tabBarLabel: 'Home',
+              tabBarIcon: ({ color, size }) => {
+                return <Icon name="home" size={size} color={color} />;
+              }}}/>
+
+          <Tab.Screen 
+            name="Profile" 
+            options={{
+            tabBarLabel: 'Profile',
+            tabBarIcon: ({ color, size }) => {
+              return <Icon name="account" size={size} color={color} />;
+            }
+            }}>
+            {(props) => <ProfileStack {...props} logout={logout}/>}
+          </Tab.Screen>
       </Tab.Navigator>
     );
   }
