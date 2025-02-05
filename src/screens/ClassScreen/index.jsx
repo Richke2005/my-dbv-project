@@ -1,21 +1,27 @@
 import React, { useRef, useMemo, useEffect, useState } from "react";
 import { SafeAreaView, Pressable, ScrollView } from "react-native";
-import { ClassService }from "../../infra/services/index.js";
-import { ActivityIndicator, Avatar, Card, IconButton, MD2Colors} from "react-native-paper"
-import BottomSheet, { BottomSheetView, BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import ImageCard from "../../patterns/imageCard";
+import { ClassService } from "../../infra/services/index.js";
 import { PressedAvatarGroup, SpacedAvatarGroup } from "../../patterns/avatarGroup/index.js";
+import { ActivityIndicator, Avatar, Card, IconButton, MD2Colors} from "react-native-paper";
+import BookCard from "../../patterns/imageCard/bookCard.jsx";
+import BottomSheet, { BottomSheetView, BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import ImageCard from "../../patterns/imageCard/dailyVerse.jsx";
 
 export default function ClassScreen({route, navigation}){
 	const { classId } = route?.params;
+	const pathfinders = [];
+	const leaderships = [];
 	const [classData, setClassData] = useState({});
 	const [users, setUsers] = useState([]);
+	const [books, setBooks] = useState([]);
 	const bottomSheetRef = useRef(null);
 	const snapPoints = useMemo(() => ["25%", "50%", "90%"], []);
 
-	const pathfinders = [];
-	const leaderships = [];
-	
+	useEffect(() => {
+		fetchClassUsers();
+		fetchBooks();
+	}, []);
+
 	users.forEach((user) => {
 		if(user.classification === "pathfinder"){
 			pathfinders.push(user);
@@ -25,15 +31,7 @@ export default function ClassScreen({route, navigation}){
 		}
 	});
 
-	const handleExpandAction = () => bottomSheetRef.current?.expand();
-	const handleCloseAction = () => bottomSheetRef.current?.close();
-
-
-	useEffect(() => {
-		fetchClassData();
-	}, []);
-
-	function fetchClassData() {
+	function fetchClassUsers() {
 		new ClassService()
 			.getPathfindersByClassId(classId)
 			.then((data) => {
@@ -42,8 +40,19 @@ export default function ClassScreen({route, navigation}){
 			})
 			.catch((error) => console.error(error));
 	}
-		
 
+	function fetchBooks(){
+		new ClassService()
+		.getBooksByClassId(classId)
+		.then((data) => {
+			setBooks(data);
+		})
+		.catch((error) => console.error(error));
+	}
+
+	const handleExpandAction = () => bottomSheetRef.current?.expand();
+	const handleCloseAction = () => bottomSheetRef.current?.close();
+		
 	if (Object.keys(classData).length === 0)
 		return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
 	
@@ -65,41 +74,51 @@ export default function ClassScreen({route, navigation}){
 							/>
 						))}
 					</PressedAvatarGroup>
-				</Pressable>
+			</Pressable>
 
-				<ImageCard
-					img={classData.image}
-					title={classData.name}
-					subtitle={classData.type}
-					style={{ minHeight: 300 }}
-				/>
-				
-				
-				<Card.Title 
+			<ImageCard
+				img={classData.image}
+				title={classData.name}
+				subtitle={classData.type}
+				style={{ minHeight: 300 }}
+			/>
+			
+			<Card.Title 
 				title="Desbravadores"
 				titleStyle={{fontSize: 20, fontWeight: "bold"}}
 				/>
 
-				<Card.Content style={{paddingHorizontal: 0}}>
-					<SpacedAvatarGroup max={5} spacement={10}>
-						{pathfinders.map((pathfinder) => (
-							<Avatar.Image
-								key={pathfinder._id}
-								size={70}
-								source={{ uri: pathfinder.image }}
-							/>
-						))}
-					</SpacedAvatarGroup>
-				</Card.Content>
+			<Card.Content style={{paddingHorizontal: 0, marginBottom: 20}} t>
+				<SpacedAvatarGroup max={5} spacement={10}>
+					{pathfinders.map((pathfinder) => (
+						<Avatar.Image
+							key={pathfinder._id}
+							size={70}
+							source={{ uri: pathfinder.image }}
+						/>
+					))}
+				</SpacedAvatarGroup>
+			</Card.Content>
 
-				<Card style={{ margin: 10 }}>
-					<Card.Title
-						title="Livro"
-						subtitle={`${classData.name} - ${classData.type}`}
-						titleStyle={{fontSize: 20}}
-						left={(props) => <Avatar.Icon {...props} icon="book" />}
+
+			<Card.Title 
+					title="Livros Da Classe"
+					titleStyle={{fontSize: 20, fontWeight: "bold"}}
 					/>
-				</Card>
+			
+			<Card.Content style={{display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-around"}}>
+				{books.map((book) => (
+					<BookCard
+						id={book._id}
+						key={book._id}
+						title={book.title}
+						img={book.image}
+						style={{width: "45%"}}
+						/>)
+					)
+				}
+			</Card.Content>
+				
 		</ScrollView>
 
 		<BottomSheet
@@ -120,7 +139,6 @@ export default function ClassScreen({route, navigation}){
 						<Card.Title
 							key={leadership._id}
 							title={leadership.name}
-							subtitle={leadership.function}
 							left={(props) => <Avatar.Image {...props} source={{uri: leadership.image}} />}
 							right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => {}} />}
 						/>

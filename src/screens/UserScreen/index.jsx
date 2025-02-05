@@ -1,7 +1,7 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Animated, Easing } from "react-native";
+import { SafeAreaView, ScrollView, Animated, Easing } from "react-native";
 import { ProfileService } from "../../infra/services/index.js";
-import ImageCard from "../../patterns/imageCard/index.jsx";
+import ImageCard from "../../patterns/imageCard/dailyVerse.jsx";
 import { ActivityIndicator, MD2Colors, Card, Avatar, IconButton, Button } from "react-native-paper";
 
 export default function UserScreen({route, navigation}) {
@@ -55,7 +55,7 @@ export default function UserScreen({route, navigation}) {
 	if (Object.keys(userData).length === 0)
 		return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
 
-	return <SafeAreaView>
+	return <SafeAreaView style={{ flex: 1 }}>
 		<ScrollView>
 			<ImageCard
 				title="Proverbs 3:5-6"
@@ -129,11 +129,3 @@ export default function UserScreen({route, navigation}) {
 			</ScrollView>
 	</SafeAreaView>;
 }
-
-const styles = StyleSheet.create({
-	center: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-});

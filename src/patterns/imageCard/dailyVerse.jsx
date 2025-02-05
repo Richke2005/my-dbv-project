@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import { View, Pressable, Text, Image, StyleSheet } from "react-native";
 
 const ImageCard = ({children, title, subtitle, text, img, style, ...props}) => {
+    
+    
     return<Pressable style={[styles.cardContainer, style]} {...props}>
         <Image source={{uri: img}} style={{ 
             position: "absolute", 

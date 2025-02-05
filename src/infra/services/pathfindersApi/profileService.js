@@ -1,9 +1,21 @@
 import Service from './service.js';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class ProfileService extends Service{
     constructor() {
         super('profile');
+    }
+
+    async testToken(token) {
+        const response = await fetch(`${this.url}/home`, {
+            method: 'GET',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+            },
+            mode: 'cors'
+        });
+
+        return response;
     }
 
     async getProfile() {

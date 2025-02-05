@@ -17,6 +17,19 @@ class ClassService extends Service{
 
         return response.json();
     }
+
+    async getBooksByClassId(id){
+        const response = await fetch(`${this.url}/${id}/books`, {
+            method: 'GET',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${await super.getToken()}`
+            },
+            mode: 'cors'
+        });
+
+        return response.json();
+    }
 }
 
 export default ClassService;

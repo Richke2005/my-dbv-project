@@ -4,7 +4,7 @@ import { ClassService }from "../../infra/services/index.js";
 import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator, Avatar, Card, IconButton, MD2Colors} from "react-native-paper"
 import BottomSheet, { BottomSheetView, BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import ImageCard from "../../patterns/imageCard";
+import ImageCard from "../../patterns/imageCard/dailyVerse.jsx";
 import { PressedAvatarGroup, SpacedAvatarGroup } from "../../patterns/avatarGroup/index.js";
 
 const UnitScreen = ({route}) => {

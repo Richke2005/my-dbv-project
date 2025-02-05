@@ -40,7 +40,7 @@ export default function ProfileScreen({route, navigation, onLogout}) {
 
 
 	return <SafeAreaView>
-		<ScrollView>
+		<ScrollView scrollEnabled={true}>
 			<ProfilePicture
 			style={{marginTop: 20}} 
 			name={info.name} 

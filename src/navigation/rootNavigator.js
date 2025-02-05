@@ -4,11 +4,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { ProfileService } from "../infra/services/index.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 import TabBar from "../patterns/tabBar/index.jsx";
 import SocialClubStack from "./appStacks/socialClubStack/index.js";
-import ClassBookStack from "./appStacks/classBookStack/index.js";
+import LibraryStack from "./appStacks/libraryStack/index.js";
 import HomeStack from "./appStacks/homeStack/index.js";
 import ProfileStack from "./appStacks/profileStack/index.js";
 import LoginScreen from "../screens/LoginScreen/index.jsx";
@@ -22,25 +24,23 @@ export default function RootNavigator() {
 
   useEffect(() => {
       //TODO: Check if user is authenticated
-      const checkAuth = async () => {
-        const token = await AsyncStorage.getItem('token');
-          if(testToken(token)){
-            setIsAuthenticated(true);
-          }
-        };
       checkAuth();
   }, []);
 
-  const testToken = async (token) => {
-    const response = await fetch(`${this.url}/home`, {
-        method: 'GET',
-        headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-        },
-        mode: 'cors'
-    });
+  const checkAuth = async () => {
+    const token = await AsyncStorage.getItem('token');
+    const status = await testToken(token);
+    if(status){
+      setIsAuthenticated(true);
+    }else{
+      setIsAuthenticated(false);
+    }
+  };
 
+  async function testToken(token) {
+    if(token === undefined) return false;
+    const response = await new ProfileService().testToken(token);
+    
     return (response.status === 200);
   };
 
@@ -81,7 +81,7 @@ export default function RootNavigator() {
             }}}/>
           <Tab.Screen 
             name="Books" 
-            component={ClassBookStack} 
+            component={LibraryStack} 
             options={{
               tabBarLabel: 'Books',
               tabBarIcon: ({ color, size }) => {
