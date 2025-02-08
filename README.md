@@ -23,25 +23,4 @@ The project aims to simplify the organizational and logistical processes of the 
 
 ### Como Executar o Projeto
 
-1. Clone o repositório:
-    ```sh
-    git clone https://github.com/seu-usuario/fighting_car.git
-    ```
-2. Abra o projeto no PlatformIO.
-3. Conecte os componentes conforme o esquema elétrico.
-4. Carregue o código na placa Arduino.
-5. Utilize um aplicativo de controle Bluetooth para controlar o carro.
-
-### Próximos Passos
-
-- Implementar controle via Wi-Fi
-- Adicionar câmera para visão remota
-- Criar um aplicativo móvel dedicado
-
-### Contribuições
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
-### Licença
-
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
