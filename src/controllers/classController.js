@@ -17,6 +17,16 @@ class ClassController extends Controller{
             return res.status(500).send({ error: error.message });
         }
     }
+
+    async getClassBooks(req, res){
+        try {
+            const { id } = req.params;
+            const classResponse = await this.entityService.getBooksByClassId(id);
+            return res.status(200).send(classResponse);
+        } catch (error) {
+            return res.status(500).send({ error: error.message });
+        }
+    }
 }
 
 module.exports = ClassController;

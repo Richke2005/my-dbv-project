@@ -6,6 +6,36 @@ class ClassService extends Service{
         super("classes");
     }
 
+    async getBooksByClassId(id){
+        return this.getRegByAggregation([
+            {
+                $match: {
+                    _id: new ObjectId(id)
+                }
+            },
+            {
+                $lookup: {
+                    from: "books",
+                    localField: "_id",
+                    foreignField: "class._id",
+                    as: "books"
+                }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    image: 1,
+                    type: 1,
+                    'books._id': 1,
+                    'books.title': 1,
+                    'books.image': 1
+                }
+            },
+        ])
+        .then(items => items[0]);
+    }
+
     async getPathfindersByClassId(id){
         return this.getRegByAggregation([
             {

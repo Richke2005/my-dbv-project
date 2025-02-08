@@ -3,7 +3,7 @@ const authRoutes = require("./authRoutes.js");
 const authenticate = require("../middlewares/authenticate.js");
 const bookResponseRoutes = require("./bookResponseRoutes.js");
 const classRoutes = require("./classRoutes.js");
-const classBookRoutes = require("./classBookRoutes.js");
+const bookRoutes = require("./bookRoutes.js");
 const clubRoutes = require("./clubRoutes.js");
 const userRoutes = require("./userRoutes.js");
 const profileRoutes = require("./profileRoutes.js");
@@ -22,7 +22,7 @@ module.exports = (app) => {
         authenticate,
         bookResponseRoutes,
         classRoutes,
-        classBookRoutes,
+        bookRoutes,
         clubRoutes,
         userRoutes,
         profileRoutes,

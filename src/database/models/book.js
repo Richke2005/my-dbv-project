@@ -1,6 +1,11 @@
 const {Schema} = require('mongoose');
 
-const classbookSchema = new Schema({
+const bookSchema = new Schema({
+    image: String,
+    title: {
+        type: String,
+        required: true,
+    },
     class: {
         _id: {
             type: Schema.Types.ObjectId,
@@ -12,12 +17,12 @@ const classbookSchema = new Schema({
             required: true,
         }
     },
-    book: [
+    content: [
         {
             requirement: {
                 type: String
             },
-            type: {
+            category: {
                 type: String
             }
         }
@@ -27,4 +32,4 @@ const classbookSchema = new Schema({
     timestamps: true,
 });
 
-module.exports = classbookSchema;
+module.exports = bookSchema;
