@@ -9,7 +9,7 @@ The project aims to simplify the organizational and logistical processes of the 
 | :fire: Desafio     | Implementar um app Para gestão
 
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
-![](https://lh3.googleusercontent.com/pw/AP1GczPujadSsjmaZ43Kt_eETJA04ZeoR3kkazbit3Or-5FR5_hfmWb7dr0F_yYVgt2O4P_okc1zaIPrYDfQMIT4iPmwp9EBgqWCgANdCzOpsm_S_QS0IeqFhZ7CiLBMjGhn8NGabMiTZcWGqIrIc9VGC0N1Hw=w433-h962-s-no-gm?authuser=0#vitrinedev)
+![](https://lh3.googleusercontent.com/pw/AP1GczOy0B0oQMMe-wk9ffV2UyP1kZEe5ikelpO-nYPfdjQkesiRBYHBZVeku6zbXM0eVXbHzl6wliNZ0Hk5jxshfvqRotmZ95eOuUQ_i6zBcmm1xUEXI3Uj5wzIxp8TwNEAORDmDqaetou-lyxbzBeLa7hTuQ=w292-h650-s-no-gm?authuser=0#vitrinedev)
 
 ## Detalhes do projeto
 
