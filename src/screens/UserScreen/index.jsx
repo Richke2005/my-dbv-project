@@ -58,7 +58,7 @@ export default function UserScreen({route, navigation}) {
 
 	return <SafeAreaView style={{ flex: 1 }}>
 		<ScrollView>
-			<View style={{ margin: 10,  display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+			<View style={{ marginTop: 60, margin: 10,  display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
 				<Avatar.Image size={40} source={{uri: userData.image}} />
 				<View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
 					<Text style={{ fontSize: 20, marginRight: 5 }}>{userData.talents} $</Text>
