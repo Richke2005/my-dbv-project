@@ -4,7 +4,7 @@ import { BookService } from "../../infra/services";
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import BookCard from "../../patterns/imageCard/bookCard.jsx";
 import ImageCard from "../../patterns/imageCard/dailyVerse.jsx";
-import { Portal, Dialog, Button } from "react-native-paper";
+import { ActivityIndicator, MD2Colors, Portal, Dialog, Button } from "react-native-paper";
 
 
 const { width, height } = Dimensions.get('window');
@@ -33,6 +33,10 @@ export default function LibraryScreen({route, navigation}){
         })
         .catch((error) => console.error(error));
     }
+
+    if (books.length === 0)
+        return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
+
 
     return <SafeAreaView style={{flex: 1}}>
         <ScrollView>

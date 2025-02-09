@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef, useMemo} from "react";
 import { SafeAreaView, FlatList, Text } from "react-native";
 import {BookService} from "../../infra/services/index.js";
 import ImageCard from "../../patterns/imageCard/dailyVerse";
-import { ActivityIndicator, Card, Chip, Button } from "react-native-paper";
+import { ActivityIndicator, MD2Colors, Card, Chip, Button } from "react-native-paper";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 
