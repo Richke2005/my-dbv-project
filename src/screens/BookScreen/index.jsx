@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef, useMemo} from "react";
 import { SafeAreaView, FlatList, Text } from "react-native";
 import {BookService} from "../../infra/services/index.js";
 import ImageCard from "../../patterns/imageCard/dailyVerse";
-import { Card, Chip, Button } from "react-native-paper";
+import { ActivityIndicator, Card, Chip, Button } from "react-native-paper";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 
@@ -66,6 +66,8 @@ export default function BookScreen({route, navigation}) {
         }
     }
 
+    if (Object.keys(book).length === 0)
+		return <ActivityIndicator size={50} style={{ marginTop: 20 }} animating={true} color={MD2Colors.red800} />;
 
     function renderContent({item, index}){
         return <Card key={item._id} style={{ margin: 10 }}
