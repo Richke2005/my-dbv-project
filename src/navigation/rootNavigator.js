@@ -14,7 +14,8 @@ import LibraryStack from "./appStacks/libraryStack/index.js";
 import HomeStack from "./appStacks/homeStack/index.js";
 import ProfileStack from "./appStacks/profileStack/index.js";
 import LoginScreen from "../screens/LoginScreen/index.jsx";
-import RegisterScreen from "../screens/RegisterScreen/index.jsx";
+import PersoalInfo from "../screens/RegisterScreen/persoalInfo.jsx";
+import BloodType from "../screens/RegisterScreen/bloodType.jsx";
 
 export default function RootNavigator() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -60,6 +61,8 @@ export default function RootNavigator() {
         <AuthStack.Screen name="Login" options={{headerShown: false}}>
           {(props) => <LoginScreen {...props} onStoreToken={loginToApp}/>}
         </AuthStack.Screen>
+        <AuthStack.Screen name="PersonalInfo" component={PersoalInfo} options={{title: "Informações"}}/>
+        <AuthStack.Screen name="BloodType" component={BloodType} options={{title: "Tipo Sanguíneo"}}/>
       </AuthStack.Navigator>
     );
   }

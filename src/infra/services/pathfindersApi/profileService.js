@@ -32,7 +32,7 @@ class ProfileService extends Service{
     }
 
     async updateProfile(data) {
-        const response = await fetch(`${this.url}/update`, {
+        const response = await fetch(`${this.url}/home`, {
             method: 'PUT',
             headers: {
             'Content-Type': 'application/json',

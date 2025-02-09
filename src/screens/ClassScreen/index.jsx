@@ -45,7 +45,7 @@ export default function ClassScreen({route, navigation}){
 		new ClassService()
 		.getBooksByClassId(classId)
 		.then((data) => {
-			setBooks(data);
+			setBooks(data.books);
 		})
 		.catch((error) => console.error(error));
 	}

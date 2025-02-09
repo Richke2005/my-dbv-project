@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, ScrollView, Animated, Easing } from "react-native";
+import { SafeAreaView, ScrollView, View, Text, Animated, Easing } from "react-native";
 import { ProfileService } from "../../infra/services/index.js";
 import ImageCard from "../../patterns/imageCard/dailyVerse.jsx";
 import { ActivityIndicator, MD2Colors, Card, Avatar, IconButton, Button } from "react-native-paper";
@@ -44,7 +44,8 @@ export default function UserScreen({route, navigation}) {
 		if (!checkButton) {
 			setCheckButton(true);
 			const currentTalents = userData.talents;
-			new ProfileService().updateProfile({ talents: currentTalents + 10 })
+			new ProfileService()
+			.updateProfile({ talents: currentTalents + 10 })
 				.then(() => {
 					fetchUserData();
 					animateButton();
@@ -57,6 +58,12 @@ export default function UserScreen({route, navigation}) {
 
 	return <SafeAreaView style={{ flex: 1 }}>
 		<ScrollView>
+			<View style={{ margin: 10,  display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+				<Avatar.Image size={40} source={{uri: userData.image}} />
+				<View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+					<Text style={{ fontSize: 20, marginRight: 5 }}>{userData.talents} $</Text>
+				</View>
+			</View>
 			<ImageCard
 				title="Proverbs 3:5-6"
 				text="Trust in the Lord with all your heart

@@ -14,7 +14,7 @@ export default function HomeStack() {
     return (
         <Stack.Navigator initialRouteName="UserScreen" 
         screenOptions={{headerShown: true}}>
-            <Stack.Screen name="UserScreen" component={UserScreen} options={{title: "Home", headerBackVisible: false, headerBackButtonMenuEnabled: false}} />
+            <Stack.Screen name="UserScreen" component={UserScreen} options={{title: "Home", headerShown: false, headerBackVisible: false, headerBackButtonMenuEnabled: false}} />
             <Stack.Screen name="NewsScreen" component={NewsScreen} options={{title: "News"}} />
             <Stack.Screen name="ClassScreen" component={ClassScreen} options={{title: "Classe"}} />
             <Stack.Screen name="UnitScreen" component={UnitScreen} options={{title: "Unit"}} />

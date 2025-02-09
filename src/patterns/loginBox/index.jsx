@@ -3,10 +3,13 @@ import { AuthService } from "../../infra/services/index"
 
 import { View, Text, KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import { TextInput, Button } from 'react-native-paper';
+import { useNavigation } from "@react-navigation/native";
 
-const LoginBox = ({title, onLogin}) => {
+const LoginBox = ({navigation, title, onLogin}) => {
     const [labelEmail, setEmail] = useState("");
     const [labelPassword, setPassword] = useState("");
+    const [isVisible, setVisibility] = useState(true)
+    const navigator = useNavigation();
     const authService = new AuthService();
 
     const handleLogin = async () => {
@@ -47,7 +50,8 @@ const LoginBox = ({title, onLogin}) => {
                     label="Password"
                     mode="outlined"
                     textContentType="password"
-                    secureTextEntry={true}
+                    secureTextEntry={isVisible}
+                    right={<TextInput.Icon icon="eye" onPress={()=> setVisibility(!isVisible)} />}
                     passwordRules="required: lower; required: upper; required: digit; required: [-]; minlength: 8;"
                     value={labelPassword}
                     onChangeText={text => setPassword(text)}
@@ -60,6 +64,16 @@ const LoginBox = ({title, onLogin}) => {
                     mode="contained" 
                     onPress={async () => await handleLogin()}>
                         Login
+                </Button>
+            </View>
+
+            <View>
+                <Button
+                    style={{marginTop: 20}}
+                    icon="account-plus" 
+                    mode="text" 
+                    onPress={() => navigator.navigate("PersonalInfo")}>
+                        Or, Sign Up
                 </Button>
             </View>
         </View>
